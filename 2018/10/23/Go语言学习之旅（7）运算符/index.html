@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.2" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.4.2',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Go语言运算符运算符用于在程序运行时执行数学或逻辑运算。 Go 语言内置的运算符有：  算术运算符 关系运算符 逻辑运算符 位运算符 赋值运算符 其他运算符  接下来让我们来详细看看各个运算符的介绍。 算术运算符下表列出了所有Go语言的算术运算符。假定 A 值为 10，B 值为 20。    运算符 描述 实例     + 相加 A + B 输出结果 30   - 相减 A - B 输出结果 -1">
+<meta name="keywords" content="Go语言基础">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Go语言学习之旅（7）运算符">
+<meta property="og:url" content="http://yoursite.com/2018/10/23/Go语言学习之旅（7）运算符/index.html">
+<meta property="og:site_name" content="Martin Blogs">
+<meta property="og:description" content="Go语言运算符运算符用于在程序运行时执行数学或逻辑运算。 Go 语言内置的运算符有：  算术运算符 关系运算符 逻辑运算符 位运算符 赋值运算符 其他运算符  接下来让我们来详细看看各个运算符的介绍。 算术运算符下表列出了所有Go语言的算术运算符。假定 A 值为 10，B 值为 20。    运算符 描述 实例     + 相加 A + B 输出结果 30   - 相减 A - B 输出结果 -1">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-10-23T09:26:47.467Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Go语言学习之旅（7）运算符">
+<meta name="twitter:description" content="Go语言运算符运算符用于在程序运行时执行数学或逻辑运算。 Go 语言内置的运算符有：  算术运算符 关系运算符 逻辑运算符 位运算符 赋值运算符 其他运算符  接下来让我们来详细看看各个运算符的介绍。 算术运算符下表列出了所有Go语言的算术运算符。假定 A 值为 10，B 值为 20。    运算符 描述 实例     + 相加 A + B 输出结果 30   - 相减 A - B 输出结果 -1">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/10/23/Go语言学习之旅（7）运算符/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Go语言学习之旅（7）运算符 | Martin Blogs</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <a href="https://github.com/LiuGuoJiang" target="_blank">
+      <img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png" alt="Fork me on GitHub">
+    </a>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Martin Blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+    <a href="/schedule/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>日程表</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/23/Go语言学习之旅（7）运算符/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Martin（中文名：刘国江）">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/touxiang3.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Martin Blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Go语言学习之旅（7）运算符
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-10-23 17:04:24 / 修改时间：17:26:47" itemprop="dateCreated datePublished" datetime="2018-10-23T17:04:24+08:00">2018-10-23</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/go/" itemprop="url" rel="index"><span itemprop="name">go</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+          
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Go语言运算符"><a href="#Go语言运算符" class="headerlink" title="Go语言运算符"></a>Go语言运算符</h2><p>运算符用于在程序运行时执行数学或逻辑运算。</p>
+<p>Go 语言内置的运算符有：</p>
+<ul>
+<li>算术运算符</li>
+<li>关系运算符</li>
+<li>逻辑运算符</li>
+<li>位运算符</li>
+<li>赋值运算符</li>
+<li>其他运算符</li>
+</ul>
+<p>接下来让我们来详细看看各个运算符的介绍。</p>
+<h2 id="算术运算符"><a href="#算术运算符" class="headerlink" title="算术运算符"></a>算术运算符</h2><p>下表列出了所有Go语言的算术运算符。假定 A 值为 10，B 值为 20。</p>
+<table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>描述</th>
+<th>实例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>+</td>
+<td>相加</td>
+<td>A + B 输出结果 30</td>
+</tr>
+<tr>
+<td>-</td>
+<td>相减</td>
+<td>A - B 输出结果 -10</td>
+</tr>
+<tr>
+<td>*</td>
+<td>相乘</td>
+<td>A * B 输出结果 200</td>
+</tr>
+<tr>
+<td>/</td>
+<td>相除</td>
+<td>B / A 输出结果 2</td>
+</tr>
+<tr>
+<td>%</td>
+<td>求余</td>
+<td>B % A 输出结果 0</td>
+</tr>
+<tr>
+<td>++</td>
+<td>自增</td>
+<td>A++ 输出结果 11</td>
+</tr>
+<tr>
+<td>–</td>
+<td>自减</td>
+<td>A– 输出结果 9</td>
+</tr>
+</tbody>
+</table>
+<p>以下实例演示了各个算术运算符的用法：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>  &#123;</span><br><span class="line">	<span class="keyword">var</span> m <span class="keyword">int</span> =<span class="number">21</span></span><br><span class="line">	<span class="keyword">var</span> k <span class="keyword">int</span> =<span class="number">10</span></span><br><span class="line">	<span class="keyword">var</span> j <span class="keyword">int</span></span><br><span class="line"></span><br><span class="line">	j=m+k</span><br><span class="line">	fmt.Printf(<span class="string">"第一行-j的值为%d\n"</span>,j)</span><br><span class="line">	j=m-k</span><br><span class="line">	fmt.Printf(<span class="string">"第二行-j的值为%d\n"</span>,j)</span><br><span class="line">	j=m*k</span><br><span class="line">	fmt.Printf(<span class="string">"第三行-j的值为%d\n"</span>,j)</span><br><span class="line">	j=m/k</span><br><span class="line">	fmt.Printf(<span class="string">"第四行-j的值为%d\n"</span>,j)</span><br><span class="line">	j=m%k</span><br><span class="line">	fmt.Printf(<span class="string">"第五行-j的值为%d\n"</span>,j)</span><br><span class="line">	j++</span><br><span class="line">	fmt.Printf(<span class="string">"第六行-j的值为%d\n"</span>,j)</span><br><span class="line">	j=<span class="number">33</span></span><br><span class="line">    j--</span><br><span class="line">	fmt.Printf(<span class="string">"第七行-j的值为%d\n"</span>,j)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上实例运行结果：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">第一行-j的值为<span class="number">31</span></span><br><span class="line">第二行-j的值为<span class="number">11</span></span><br><span class="line">第三行-j的值为<span class="number">210</span></span><br><span class="line">第四行-j的值为<span class="number">2</span></span><br><span class="line">第五行-j的值为<span class="number">1</span></span><br><span class="line">第六行-j的值为<span class="number">2</span></span><br><span class="line">第七行-j的值为<span class="number">32</span></span><br></pre></td></tr></table></figure>
+<h2 id="关系运算符"><a href="#关系运算符" class="headerlink" title="关系运算符"></a>关系运算符</h2><p>下表列出了所有Go语言的关系运算符。假定 A 值为 10，B 值为 20</p>
+<table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>描述</th>
+<th>实例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>==</td>
+<td>检查两个值是否相等，如果相等返回 True 否则返回 False。</td>
+<td>(A == B) 为 False</td>
+</tr>
+<tr>
+<td>!=</td>
+<td>检查两个值是否不相等，如果不相等返回 True 否则返回 False。</td>
+<td>(A != B) 为 True</td>
+</tr>
+<tr>
+<td>&gt;</td>
+<td>检查左边值是否大于右边值，如果是返回 True 否则返回 False。</td>
+<td>(A &gt; B) 为 False</td>
+</tr>
+<tr>
+<td>&lt;</td>
+<td>检查左边值是否小于右边值，如果是返回 True 否则返回 False。</td>
+<td>(A &lt; B) 为 True</td>
+</tr>
+<tr>
+<td>&gt;=</td>
+<td>检查左边值是否大于等于右边值，如果是返回 True 否则返回 False。</td>
+<td>(A &gt;= B) 为 False</td>
+</tr>
+<tr>
+<td>&lt;=</td>
+<td>检查左边值是否小于等于右边值，如果是返回 True 否则返回 False。</td>
+<td>(A &lt;= B) 为 True</td>
+</tr>
+</tbody>
+</table>
+<p>以下实例演示了关系运算符的用法：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">   <span class="keyword">var</span> a <span class="keyword">int</span> = <span class="number">21</span></span><br><span class="line">   <span class="keyword">var</span> b <span class="keyword">int</span> = <span class="number">10</span></span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span>( a == b ) &#123;</span><br><span class="line">      fmt.Printf(<span class="string">"第一行 - a 等于 b\n"</span> )</span><br><span class="line">   &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      fmt.Printf(<span class="string">"第一行 - a 不等于 b\n"</span> )</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">if</span> ( a &lt; b ) &#123;</span><br><span class="line">      fmt.Printf(<span class="string">"第二行 - a 小于 b\n"</span> )</span><br><span class="line">   &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      fmt.Printf(<span class="string">"第二行 - a 不小于 b\n"</span> )</span><br><span class="line">   &#125; </span><br><span class="line">   </span><br><span class="line">   <span class="keyword">if</span> ( a &gt; b ) &#123;</span><br><span class="line">      fmt.Printf(<span class="string">"第三行 - a 大于 b\n"</span> )</span><br><span class="line">   &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      fmt.Printf(<span class="string">"第三行 - a 不大于 b\n"</span> )</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="comment">/* Lets change value of a and b */</span></span><br><span class="line">   a = <span class="number">5</span></span><br><span class="line">   b = <span class="number">20</span></span><br><span class="line">   <span class="keyword">if</span> ( a &lt;= b ) &#123;</span><br><span class="line">      fmt.Printf(<span class="string">"第四行 - a 小于等于 b\n"</span> )</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">if</span> ( b &gt;= a ) &#123;</span><br><span class="line">      fmt.Printf(<span class="string">"第五行 - b 大于等于 a\n"</span> )</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上实例运行结果：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">第一行 - a 不等于 b</span><br><span class="line">第二行 - a 不小于 b</span><br><span class="line">第三行 - a 大于 b</span><br><span class="line">第四行 - a 小于等于 b</span><br><span class="line">第五行 - b 大于等于 a</span><br></pre></td></tr></table></figure>
+<h2 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h2><p>下表列出了所有Go语言的逻辑运算符。假定 A 值为 True，B 值为 False</p>
+<table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>描述</th>
+<th>实例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&amp;&amp;</td>
+<td>逻辑 AND 运算符。 如果两边的操作数都是 True，则条件 True，否则为 False。</td>
+<td>(A &amp;&amp; B) 为 False</td>
+</tr>
+<tr>
+<td>\</td>
+<td>\</td>
+<td></td>
+<td>逻辑 OR 运算符。 如果两边的操作数有一个 True，则条件 True，否则为 False。</td>
+<td>(A \</td>
+<td>\</td>
+<td>B) 为 True</td>
+</tr>
+<tr>
+<td>!</td>
+<td>逻辑 NOT 运算符。 如果条件为 True，则逻辑 NOT 条件 False，否则为 True。</td>
+<td>!(A &amp;&amp; B) 为 True</td>
+</tr>
+</tbody>
+</table>
+<p>以下实例演示了逻辑运算符的用法：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">   <span class="keyword">var</span> a <span class="keyword">bool</span> = <span class="literal">true</span></span><br><span class="line">   <span class="keyword">var</span> b <span class="keyword">bool</span> = <span class="literal">false</span></span><br><span class="line">   <span class="keyword">if</span> ( a &amp;&amp; b ) &#123;</span><br><span class="line">      fmt.Printf(<span class="string">"第一行 - 条件为 true\n"</span> )</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">if</span> ( a || b ) &#123;</span><br><span class="line">      fmt.Printf(<span class="string">"第二行 - 条件为 true\n"</span> )</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="comment">/* 修改 a 和 b 的值 */</span></span><br><span class="line">   a = <span class="literal">false</span></span><br><span class="line">   b = <span class="literal">true</span></span><br><span class="line">   <span class="keyword">if</span> ( a &amp;&amp; b ) &#123;</span><br><span class="line">      fmt.Printf(<span class="string">"第三行 - 条件为 true\n"</span> )</span><br><span class="line">   &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      fmt.Printf(<span class="string">"第三行 - 条件为 false\n"</span> )</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">if</span> ( !(a &amp;&amp; b) ) &#123;</span><br><span class="line">      fmt.Printf(<span class="string">"第四行 - 条件为 true\n"</span> )</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上实例运行结果：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">第二行 - 条件为 <span class="literal">true</span></span><br><span class="line">第三行 - 条件为 <span class="literal">false</span></span><br><span class="line">第四行 - 条件为 <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<h2 id="位运算符"><a href="#位运算符" class="headerlink" title="位运算符"></a>位运算符</h2><p>位运算符对整数在内存中的二进制位进行操作。</p>
+<p>下表列出了位运算符 &amp;, |, 和 ^ 的计算：</p>
+<table>
+<thead>
+<tr>
+<th>p</th>
+<th>q</th>
+<th>p &amp; q</th>
+<th>p \</th>
+<th>q</th>
+<th>p ^ q</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>假定 A = 60; B = 13; 其二进制数转换为：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">A = <span class="number">0011</span> <span class="number">1100</span></span><br><span class="line"></span><br><span class="line">B = <span class="number">0000</span> <span class="number">1101</span></span><br><span class="line"></span><br><span class="line">-----------------</span><br><span class="line"></span><br><span class="line">A&amp;B = <span class="number">0000</span> <span class="number">1100</span></span><br><span class="line"></span><br><span class="line">A|B = <span class="number">0011</span> <span class="number">1101</span></span><br><span class="line"></span><br><span class="line">A^B = <span class="number">0011</span> <span class="number">0001</span></span><br></pre></td></tr></table></figure>
+<p>Go 语言支持的位运算符如下表所示。假定 A 为60，B 为13：</p>
+<table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>描述</th>
+<th>实例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&amp;</td>
+<td>按位与运算符”&amp;”是双目运算符。 其功能是参与运算的两数各对应的二进位相与。</td>
+<td>(A &amp; B) 结果为 12, 二进制为 0000 1100</td>
+</tr>
+<tr>
+<td>\</td>
+<td></td>
+<td>按位或运算符”\</td>
+<td>“是双目运算符。 其功能是参与运算的两数各对应的二进位相或</td>
+<td>(A \</td>
+<td>B) 结果为 61, 二进制为 0011 1101</td>
+</tr>
+<tr>
+<td>^</td>
+<td>按位异或运算符”^”是双目运算符。 其功能是参与运算的两数各对应的二进位相异或，当两对应的二进位相异时，结果为1。</td>
+<td>(A ^ B) 结果为 49, 二进制为 0011 0001</td>
+</tr>
+<tr>
+<td>&lt;&lt;</td>
+<td>左移运算符”&lt;&lt;”是双目运算符。左移n位就是乘以2的n次方。 其功能把”&lt;&lt;”左边的运算数的各二进位全部左移若干位，由”&lt;&lt;”右边的数指定移动的位数，高位丢弃，低位补0。</td>
+<td>A &lt;&lt; 2 结果为 240 ，二进制为 1111 0000</td>
+</tr>
+<tr>
+<td>&gt;&gt;</td>
+<td>右移运算符”&gt;&gt;”是双目运算符。右移n位就是除以2的n次方。 其功能是把”&gt;&gt;”左边的运算数的各二进位全部右移若干位，”&gt;&gt;”右边的数指定移动的位数。</td>
+<td>A &gt;&gt; 2 结果为 15 ，二进制为 0000 1111</td>
+</tr>
+</tbody>
+</table>
+<p>以下实例演示了位运算符的用法：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">var</span> a <span class="keyword">uint</span> = <span class="number">60</span>    <span class="comment">/* 60 = 0011 1100 */</span>  </span><br><span class="line">   <span class="keyword">var</span> b <span class="keyword">uint</span> = <span class="number">13</span>    <span class="comment">/* 13 = 0000 1101 */</span></span><br><span class="line">   <span class="keyword">var</span> c <span class="keyword">uint</span> = <span class="number">0</span>          </span><br><span class="line"></span><br><span class="line">   c = a &amp; b       <span class="comment">/* 12 = 0000 1100 */</span> </span><br><span class="line">   fmt.Printf(<span class="string">"第一行 - c 的值为 %d\n"</span>, c )</span><br><span class="line"></span><br><span class="line">   c = a | b       <span class="comment">/* 61 = 0011 1101 */</span></span><br><span class="line">   fmt.Printf(<span class="string">"第二行 - c 的值为 %d\n"</span>, c )</span><br><span class="line"></span><br><span class="line">   c = a ^ b       <span class="comment">/* 49 = 0011 0001 */</span></span><br><span class="line">   fmt.Printf(<span class="string">"第三行 - c 的值为 %d\n"</span>, c )</span><br><span class="line"></span><br><span class="line">   c = a &lt;&lt; <span class="number">2</span>     <span class="comment">/* 240 = 1111 0000 */</span></span><br><span class="line">   fmt.Printf(<span class="string">"第四行 - c 的值为 %d\n"</span>, c )</span><br><span class="line"></span><br><span class="line">   c = a &gt;&gt; <span class="number">2</span>     <span class="comment">/* 15 = 0000 1111 */</span></span><br><span class="line">   fmt.Printf(<span class="string">"第五行 - c 的值为 %d\n"</span>, c )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上实例运行结果：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">第一行 - c 的值为 <span class="number">12</span></span><br><span class="line">第二行 - c 的值为 <span class="number">61</span></span><br><span class="line">第三行 - c 的值为 <span class="number">49</span></span><br><span class="line">第四行 - c 的值为 <span class="number">240</span></span><br><span class="line">第五行 - c 的值为 <span class="number">15</span></span><br></pre></td></tr></table></figure>
+<h2 id="赋值运算符"><a href="#赋值运算符" class="headerlink" title="赋值运算符"></a>赋值运算符</h2><p>下表列出了所有Go语言的赋值运算符</p>
+<table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>描述</th>
+<th>实例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>=</td>
+<td>简单的赋值运算符，将一个表达式的值赋给一个左值</td>
+<td>C = A + B 将 A + B 表达式结果赋值给 C</td>
+</tr>
+<tr>
+<td>+=</td>
+<td>相加后再赋值</td>
+<td>C += A 等于 C = C + A</td>
+</tr>
+<tr>
+<td>-=</td>
+<td>相减后再赋值</td>
+<td>C -= A 等于 C = C - A</td>
+</tr>
+<tr>
+<td>*=</td>
+<td>相乘后再赋值</td>
+<td>C <em>= A 等于 C = C </em> A</td>
+</tr>
+<tr>
+<td>/=</td>
+<td>相除后再赋值</td>
+<td>C /= A 等于 C = C / A</td>
+</tr>
+<tr>
+<td>%=</td>
+<td>求余后再赋值</td>
+<td>C %= A 等于 C = C % A</td>
+</tr>
+<tr>
+<td>&lt;&lt;=</td>
+<td>左移后赋值</td>
+<td>C &lt;&lt;= 2 等于 C = C &lt;&lt; 2</td>
+</tr>
+<tr>
+<td>&gt;&gt;=</td>
+<td>右移后赋值</td>
+<td>C &gt;&gt;= 2 等于 C = C &gt;&gt; 2</td>
+</tr>
+<tr>
+<td>&amp;=</td>
+<td>按位与后赋值</td>
+<td>C &amp;= 2 等于 C = C &amp; 2</td>
+</tr>
+<tr>
+<td>^=</td>
+<td>按位异或后赋值</td>
+<td>C ^= 2 等于 C = C ^ 2</td>
+</tr>
+<tr>
+<td>\</td>
+<td>=</td>
+<td>按位或后赋值</td>
+<td>C \</td>
+<td>= 2 等于 C = C \</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<p>以下实例演示了赋值运算符的用法：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">   <span class="keyword">var</span> a <span class="keyword">int</span> = <span class="number">21</span></span><br><span class="line">   <span class="keyword">var</span> c <span class="keyword">int</span></span><br><span class="line"></span><br><span class="line">   c =  a</span><br><span class="line">   fmt.Printf(<span class="string">"第 1 行 - =  运算符实例，c 值为 = %d\n"</span>, c )</span><br><span class="line"></span><br><span class="line">   c +=  a</span><br><span class="line">   fmt.Printf(<span class="string">"第 2 行 - += 运算符实例，c 值为 = %d\n"</span>, c )</span><br><span class="line"></span><br><span class="line">   c -=  a</span><br><span class="line">   fmt.Printf(<span class="string">"第 3 行 - -= 运算符实例，c 值为 = %d\n"</span>, c )</span><br><span class="line"></span><br><span class="line">   c *=  a</span><br><span class="line">   fmt.Printf(<span class="string">"第 4 行 - *= 运算符实例，c 值为 = %d\n"</span>, c )</span><br><span class="line"></span><br><span class="line">   c /=  a</span><br><span class="line">   fmt.Printf(<span class="string">"第 5 行 - /= 运算符实例，c 值为 = %d\n"</span>, c )</span><br><span class="line"></span><br><span class="line">   c  = <span class="number">200</span>; </span><br><span class="line"></span><br><span class="line">   c &lt;&lt;=  <span class="number">2</span></span><br><span class="line">   fmt.Printf(<span class="string">"第 6行  - &lt;&lt;= 运算符实例，c 值为 = %d\n"</span>, c )</span><br><span class="line"></span><br><span class="line">   c &gt;&gt;=  <span class="number">2</span></span><br><span class="line">   fmt.Printf(<span class="string">"第 7 行 - &gt;&gt;= 运算符实例，c 值为 = %d\n"</span>, c )</span><br><span class="line"></span><br><span class="line">   c &amp;=  <span class="number">2</span></span><br><span class="line">   fmt.Printf(<span class="string">"第 8 行 - &amp;= 运算符实例，c 值为 = %d\n"</span>, c )</span><br><span class="line"></span><br><span class="line">   c ^=  <span class="number">2</span></span><br><span class="line">   fmt.Printf(<span class="string">"第 9 行 - ^= 运算符实例，c 值为 = %d\n"</span>, c )</span><br><span class="line"></span><br><span class="line">   c |=  <span class="number">2</span></span><br><span class="line">   fmt.Printf(<span class="string">"第 10 行 - |= 运算符实例，c 值为 = %d\n"</span>, c )</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上实例运行结果：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">第 <span class="number">1</span> 行 - =  运算符实例，c 值为 = <span class="number">21</span></span><br><span class="line">第 <span class="number">2</span> 行 - += 运算符实例，c 值为 = <span class="number">42</span></span><br><span class="line">第 <span class="number">3</span> 行 - -= 运算符实例，c 值为 = <span class="number">21</span></span><br><span class="line">第 <span class="number">4</span> 行 - *= 运算符实例，c 值为 = <span class="number">441</span></span><br><span class="line">第 <span class="number">5</span> 行 - /= 运算符实例，c 值为 = <span class="number">21</span></span><br><span class="line">第 <span class="number">6</span>行  - &lt;&lt;= 运算符实例，c 值为 = <span class="number">800</span></span><br><span class="line">第 <span class="number">7</span> 行 - &gt;&gt;= 运算符实例，c 值为 = <span class="number">200</span></span><br><span class="line">第 <span class="number">8</span> 行 - &amp;= 运算符实例，c 值为 = <span class="number">0</span></span><br><span class="line">第 <span class="number">9</span> 行 - ^= 运算符实例，c 值为 = <span class="number">2</span></span><br><span class="line">第 <span class="number">10</span> 行 - |= 运算符实例，c 值为 = <span class="number">2</span></span><br></pre></td></tr></table></figure>
+<h2 id="其他运算符"><a href="#其他运算符" class="headerlink" title="其他运算符"></a>其他运算符</h2><table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>描述</th>
+<th>实例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&amp;</td>
+<td>返回变量存储地址</td>
+<td>&a; 将给出变量的实际地址。</td>
+</tr>
+<tr>
+<td>*</td>
+<td>指针变量。</td>
+<td>*a; 是一个指针变量</td>
+</tr>
+</tbody>
+</table>
+<p>以下实例演示了其他运算符的用法：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">   <span class="keyword">var</span> a <span class="keyword">int</span> = <span class="number">4</span></span><br><span class="line">   <span class="keyword">var</span> b <span class="keyword">int32</span></span><br><span class="line">   <span class="keyword">var</span> c <span class="keyword">float32</span></span><br><span class="line">   <span class="keyword">var</span> ptr *<span class="keyword">int</span></span><br><span class="line"></span><br><span class="line">   <span class="comment">/* 运算符实例 */</span></span><br><span class="line">   fmt.Printf(<span class="string">"第 1 行 - a 变量类型为 = %T\n"</span>, a );</span><br><span class="line">   fmt.Printf(<span class="string">"第 2 行 - b 变量类型为 = %T\n"</span>, b );</span><br><span class="line">   fmt.Printf(<span class="string">"第 3 行 - c 变量类型为 = %T\n"</span>, c );</span><br><span class="line"></span><br><span class="line">   <span class="comment">/*  &amp; 和 * 运算符实例 */</span></span><br><span class="line">   ptr = &amp;a    <span class="comment">/* 'ptr' 包含了 'a' 变量的地址 */</span></span><br><span class="line">   fmt.Printf(<span class="string">"a 的值为  %d\n"</span>, a);</span><br><span class="line">   fmt.Printf(<span class="string">"*ptr 为 %d\n"</span>, *ptr);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上实例运行结果：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">第 <span class="number">1</span> 行 - a 变量类型为 = <span class="keyword">int</span></span><br><span class="line">第 <span class="number">2</span> 行 - b 变量类型为 = <span class="keyword">int32</span></span><br><span class="line">第 <span class="number">3</span> 行 - c 变量类型为 = <span class="keyword">float32</span></span><br><span class="line">a 的值为  <span class="number">4</span></span><br><span class="line">*ptr 为 <span class="number">4</span></span><br></pre></td></tr></table></figure>
+<h2 id="运算符优先级"><a href="#运算符优先级" class="headerlink" title="运算符优先级"></a>运算符优先级</h2><p>有些运算符拥有较高的优先级，二元运算符的运算方向均是从左至右。下表列出了所有运算符以及它们的优先级，由上至下代表优先级由高到低：</p>
+<table>
+<thead>
+<tr>
+<th>优先级</th>
+<th>运算符</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>7</td>
+<td>^ !</td>
+</tr>
+<tr>
+<td>6</td>
+<td>* / % &lt;&lt; &gt;&gt; &amp; &amp;^</td>
+</tr>
+<tr>
+<td>5</td>
+<td>+ - \</td>
+<td>^</td>
+</tr>
+<tr>
+<td>4</td>
+<td>== != &lt; &lt;= &gt;= &gt;</td>
+</tr>
+<tr>
+<td>3</td>
+<td>&lt;-</td>
+</tr>
+<tr>
+<td>2</td>
+<td>&amp;&amp;</td>
+</tr>
+<tr>
+<td>1</td>
+<td>\</td>
+<td>\</td>
+</tr>
+</tbody>
+</table>
+<p>当然，你可以通过使用括号来临时提升某个表达式的整体运算优先级。</p>
+<p>以上实例运行结果：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">   <span class="keyword">var</span> a <span class="keyword">int</span> = <span class="number">20</span></span><br><span class="line">   <span class="keyword">var</span> b <span class="keyword">int</span> = <span class="number">10</span></span><br><span class="line">   <span class="keyword">var</span> c <span class="keyword">int</span> = <span class="number">15</span></span><br><span class="line">   <span class="keyword">var</span> d <span class="keyword">int</span> = <span class="number">5</span></span><br><span class="line">   <span class="keyword">var</span> e <span class="keyword">int</span>;</span><br><span class="line"></span><br><span class="line">   e = (a + b) * c / d;      <span class="comment">// ( 30 * 15 ) / 5</span></span><br><span class="line">   fmt.Printf(<span class="string">"(a + b) * c / d 的值为 : %d\n"</span>,  e );</span><br><span class="line"></span><br><span class="line">   e = ((a + b) * c) / d;    <span class="comment">// (30 * 15 ) / 5</span></span><br><span class="line">   fmt.Printf(<span class="string">"((a + b) * c) / d 的值为  : %d\n"</span> ,  e );</span><br><span class="line"></span><br><span class="line">   e = (a + b) * (c / d);   <span class="comment">// (30) * (15/5)</span></span><br><span class="line">   fmt.Printf(<span class="string">"(a + b) * (c / d) 的值为  : %d\n"</span>,  e );</span><br><span class="line"></span><br><span class="line">   e = a + (b * c) / d;     <span class="comment">//  20 + (150/5)</span></span><br><span class="line">   fmt.Printf(<span class="string">"a + (b * c) / d 的值为  : %d\n"</span> ,  e );  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上实例运行结果：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(a + b) * c / d 的值为 : <span class="number">90</span></span><br><span class="line">((a + b) * c) / d 的值为  : <span class="number">90</span></span><br><span class="line">(a + b) * (c / d) 的值为  : <span class="number">90</span></span><br><span class="line">a + (b * c) / d 的值为  : <span class="number">50</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+    
+      <div>
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      </div>
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>赞赏支持</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/weixin.jpg" alt="Martin（中文名：刘国江） 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/zhifubao.jpg" alt="Martin（中文名：刘国江） 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Go语言基础/" rel="tag"><i class="fa fa-tag"></i> Go语言基础</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/23/Go语言学习之旅（6）常量/" rel="next" title="Go语言学习之旅（6）常量">
+                <i class="fa fa-chevron-left"></i> Go语言学习之旅（6）常量
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/23/Go语言学习之旅（8）条件语句/" rel="prev" title="Go语言学习之旅（8）条件语句">
+                Go语言学习之旅（8）条件语句 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/touxiang3.jpg" alt="Martin（中文名：刘国江）">
+            
+              <p class="site-author-name" itemprop="name">Martin（中文名：刘国江）</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">文章</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">分类</span>
+                  
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">标签</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/LiuGuoJiang" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="liuguojiang1228@163.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/6765059041/profile?rightmod=1&wvr=6&mod=personinfo" target="_blank" title="微博"><i class="fa fa-fw fa-weibo"></i>微博</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/jiang-xian-sheng-76-30/activities" target="_blank" title="知乎"><i class="fa fa-fw fa-globe"></i>知乎</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://tool.oschina.net/jscompress" title="代码压缩" target="_blank">代码压缩</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://example.com/" title="CSS整理" target="_blank">CSS整理</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Go语言运算符"><span class="nav-number">1.</span> <span class="nav-text">Go语言运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算术运算符"><span class="nav-number">2.</span> <span class="nav-text">算术运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关系运算符"><span class="nav-number">3.</span> <span class="nav-text">关系运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#逻辑运算符"><span class="nav-number">4.</span> <span class="nav-text">逻辑运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#位运算符"><span class="nav-number">5.</span> <span class="nav-text">位运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#赋值运算符"><span class="nav-number">6.</span> <span class="nav-text">赋值运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他运算符"><span class="nav-number">7.</span> <span class="nav-text">其他运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运算符优先级"><span class="nav-number">8.</span> <span class="nav-text">运算符优先级</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Martin（中文名：刘国江）</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Gemini</a> v6.4.2</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+  
+    <script type="text/javascript" color="0,0,255" opacity="0.7" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
