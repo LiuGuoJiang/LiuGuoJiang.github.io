@@ -108,25 +108,25 @@
 
 
 
-  <meta name="description" content="Go语言历史​    Go 是一个开源的编程语言，它能让构造简单、可靠且高效的软件变得容易。 ​    Go是从2007年末由Robert Griesemer, Rob Pike, Ken Thompson主持开发，后来还加入了Ian Lance Taylor, Russ Cox等人，并最终于2009年11月开源，在2012年早些时候发布了Go 1稳定版本。现在Go的开发已经是完全开放的，并且拥有">
+  <meta name="description" content="Go标记Go 程序可以由多个标记组成，可以是关键字，标识符，常量，字符串，符号。如以下 GO 语句由 6 个标记组成： 1mt.Println(&quot;Hello, World!&quot;) 6 个标记是(每行一个)： 1234561. fmt	#标识符2. .	#符号3. Println	#关键字4. (	#符号5. &quot;Hello, World!&quot;	#字符串/常量6. )	#符号 行分隔符在 Go 程序中，一">
 <meta name="keywords" content="Go语言基础">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Go语言学习之旅（1）概述">
-<meta property="og:url" content="http://yoursite.com/2018/10/23/Go语言学习之旅（1）概述/index.html">
+<meta property="og:title" content="Go语言学习之旅（3）基础语法">
+<meta property="og:url" content="http://yoursite.com/2018/10/25/Go3/index.html">
 <meta property="og:site_name" content="Martin Blogs">
-<meta property="og:description" content="Go语言历史​    Go 是一个开源的编程语言，它能让构造简单、可靠且高效的软件变得容易。 ​    Go是从2007年末由Robert Griesemer, Rob Pike, Ken Thompson主持开发，后来还加入了Ian Lance Taylor, Russ Cox等人，并最终于2009年11月开源，在2012年早些时候发布了Go 1稳定版本。现在Go的开发已经是完全开放的，并且拥有">
+<meta property="og:description" content="Go标记Go 程序可以由多个标记组成，可以是关键字，标识符，常量，字符串，符号。如以下 GO 语句由 6 个标记组成： 1mt.Println(&quot;Hello, World!&quot;) 6 个标记是(每行一个)： 1234561. fmt	#标识符2. .	#符号3. Println	#关键字4. (	#符号5. &quot;Hello, World!&quot;	#字符串/常量6. )	#符号 行分隔符在 Go 程序中，一">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-10-23T06:26:08.027Z">
+<meta property="og:updated_time" content="2018-10-25T11:58:17.675Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Go语言学习之旅（1）概述">
-<meta name="twitter:description" content="Go语言历史​    Go 是一个开源的编程语言，它能让构造简单、可靠且高效的软件变得容易。 ​    Go是从2007年末由Robert Griesemer, Rob Pike, Ken Thompson主持开发，后来还加入了Ian Lance Taylor, Russ Cox等人，并最终于2009年11月开源，在2012年早些时候发布了Go 1稳定版本。现在Go的开发已经是完全开放的，并且拥有">
+<meta name="twitter:title" content="Go语言学习之旅（3）基础语法">
+<meta name="twitter:description" content="Go标记Go 程序可以由多个标记组成，可以是关键字，标识符，常量，字符串，符号。如以下 GO 语句由 6 个标记组成： 1mt.Println(&quot;Hello, World!&quot;) 6 个标记是(每行一个)： 1234561. fmt	#标识符2. .	#符号3. Println	#关键字4. (	#符号5. &quot;Hello, World!&quot;	#字符串/常量6. )	#符号 行分隔符在 Go 程序中，一">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/10/23/Go语言学习之旅（1）概述/">
+  <link rel="canonical" href="http://yoursite.com/2018/10/25/Go3/">
 
 
 
@@ -136,7 +136,7 @@
   };
 </script>
 
-  <title>Go语言学习之旅（1）概述 | Martin Blogs</title>
+  <title>Go语言学习之旅（3）基础语法 | Martin Blogs</title>
   
 
 
@@ -317,7 +317,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/23/Go语言学习之旅（1）概述/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/25/Go3/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Martin（中文名：刘国江）">
@@ -334,7 +334,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Go语言学习之旅（1）概述
+          <h1 class="post-title" itemprop="name headline">Go语言学习之旅（3）基础语法
               
             
           </h1>
@@ -359,7 +359,7 @@
                 
               
 
-              <time title="创建时间：2018-10-23 10:09:53 / 修改时间：14:26:08" itemprop="dateCreated datePublished" datetime="2018-10-23T10:09:53+08:00">2018-10-23</time>
+              <time title="创建时间：2018-10-25 19:50:24 / 修改时间：19:58:17" itemprop="dateCreated datePublished" datetime="2018-10-25T19:50:24+08:00">2018-10-25</time>
             
 
             
@@ -415,29 +415,46 @@
       
 
       
-        <h2 id="Go语言历史"><a href="#Go语言历史" class="headerlink" title="Go语言历史"></a>Go语言历史</h2><p>​    Go 是一个开源的编程语言，它能让构造简单、可靠且高效的软件变得容易。</p>
-<p>​    Go是从2007年末由Robert Griesemer, Rob Pike, Ken Thompson主持开发，后来还加入了Ian Lance Taylor, Russ Cox等人，并最终于2009年11月开源，在2012年早些时候发布了Go 1稳定版本。现在Go的开发已经是完全开放的，并且拥有一个活跃的社区 。</p>
-<h2 id="Go-语言特色"><a href="#Go-语言特色" class="headerlink" title="Go 语言特色"></a>Go 语言特色</h2><ul>
-<li>简洁、快速、安全</li>
-<li>并行、有趣、开源</li>
-<li>内存管理、数组安全、编译迅速</li>
+        <h2 id="Go标记"><a href="#Go标记" class="headerlink" title="Go标记"></a>Go标记</h2><p>Go 程序可以由多个标记组成，可以是关键字，标识符，常量，字符串，符号。如以下 GO 语句由 6 个标记组成：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mt.Println(<span class="string">"Hello, World!"</span>)</span><br></pre></td></tr></table></figure>
+<p>6 个标记是(每行一个)：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> fmt	#标识符</span><br><span class="line"><span class="number">2.</span> .	#符号</span><br><span class="line"><span class="number">3.</span> Println	#关键字</span><br><span class="line"><span class="number">4.</span> (	#符号</span><br><span class="line"><span class="number">5.</span> <span class="string">"Hello, World!"</span>	#字符串/常量</span><br><span class="line"><span class="number">6.</span> )	#符号</span><br></pre></td></tr></table></figure>
+<h2 id="行分隔符"><a href="#行分隔符" class="headerlink" title="行分隔符"></a>行分隔符</h2><p>在 Go 程序中，一行代表一个语句结束。每个语句不需要像 C 家族中的其它语言一样以分号 ; 结尾，因为这些工作都将由 Go 编译器自动完成。</p>
+<p>如果你打算将多个语句写在同一行，它们则必须使用 ; 人为区分，但在实际开发中我们并不鼓励这种做法。</p>
+<p>以下为两个语句：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fmt.Println(<span class="string">"Hello, World!"</span>)</span><br><span class="line">fmt.Println(<span class="string">"Go语言学习之旅：liuguojiang.github.io"</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h2><p>注释不会被编译，每一个包应该有相关注释。</p>
+<p>单行注释是最常见的注释形式，你可以在任何地方使用以 // 开头的单行注释。多行注释也叫块注释，均已以 /<em> 开头，并以 </em>/ 结尾。如：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 单行注释</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> Martin Blogs</span></span><br><span class="line"><span class="comment"> 我是多行注释</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+<h2 id="标识符"><a href="#标识符" class="headerlink" title="标识符"></a>标识符</h2><p>标识符用来命名变量、类型等程序实体。一个标识符实际上就是一个或是多个字母(A~Z和a~z)数字(0~9)、下划线_组成的序列，但是第一个字符必须是字母或下划线而不能是数字。</p>
+<p>以下是有效的标识符：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mahesh   kumar   abc   move_name   a_123</span><br><span class="line">myname50   _temp   j   a23b9   retVal</span><br></pre></td></tr></table></figure>
+<p>以下是无效的标识符：</p>
+<ul>
+<li>1ab（以数字开头）</li>
+<li>case（Go 语言的关键字）</li>
+<li>a+b（运算符是不允许的）</li>
 </ul>
-<h2 id="Go-语言用途"><a href="#Go-语言用途" class="headerlink" title="Go 语言用途"></a>Go 语言用途</h2><p>Go 语言被设计成一门应用于搭载 Web 服务器，存储集群或类似用途的巨型中央服务器的系统编程语言。对于高性能分布式系统领域而言，Go 语言无疑比大多数其它语言有着更高的开发效率。它提供了海量并行的支持，这对于游戏服务端的开发而言是再好不过了。</p>
-<h2 id="Go语言安装"><a href="#Go语言安装" class="headerlink" title="Go语言安装"></a>Go语言安装</h2><p>本人使用的是windows系统，所以使用的是msi文件安装，安装很简单，具体安装步骤可参考这篇博客：<a href="https://blog.csdn.net/hhtnan/article/details/78562085" target="_blank" rel="noopener">https://blog.csdn.net/hhtnan/article/details/78562085</a></p>
-<h2 id="第一个Go程序"><a href="#第一个Go程序" class="headerlink" title="第一个Go程序"></a>第一个Go程序</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    fmt.Println(<span class="string">"Hello, World!"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ go run hello.go </span><br><span class="line">Hello, World!</span><br></pre></td></tr></table></figure>
-<h2 id="Go-语言最主要的特性："><a href="#Go-语言最主要的特性：" class="headerlink" title="Go 语言最主要的特性："></a>Go 语言最主要的特性：</h2><ul>
-<li>自动垃圾回收</li>
-<li>更丰富的内置类型</li>
-<li>函数多返回值</li>
-<li>错误处理</li>
-<li>匿名函数和闭包</li>
-<li>类型和接口</li>
-<li>并发编程</li>
-<li>反射</li>
-<li>语言交互性</li>
+<h2 id="Go语言的空格"><a href="#Go语言的空格" class="headerlink" title="Go语言的空格"></a>Go语言的空格</h2><p>Go 语言中变量的声明必须使用空格隔开，如：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name <span class="keyword">string</span>;</span><br></pre></td></tr></table></figure>
+<p>空格的作用可以使用编辑器来达到目的，比如vscode</p>
+<h2 id="Go语言程序的一般结构："><a href="#Go语言程序的一般结构：" class="headerlink" title="Go语言程序的一般结构："></a>Go语言程序的一般结构：</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 当前程序的包名</span></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="comment">// 导入其他包</span></span><br><span class="line"><span class="keyword">import</span> . <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 常量定义</span></span><br><span class="line"><span class="keyword">const</span> myMoney = <span class="number">3.14</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 全局变量的声明和赋值</span></span><br><span class="line"><span class="keyword">var</span> name = <span class="string">"Martin"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 一般类型声明</span></span><br><span class="line"><span class="keyword">type</span> intType <span class="keyword">int</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 结构的声明</span></span><br><span class="line"><span class="keyword">type</span> structType <span class="keyword">struct</span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 接口的声明</span></span><br><span class="line"><span class="keyword">type</span> interfaceFunc <span class="keyword">interface</span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 由main函数作为程序入口点启动</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    Println(<span class="string">"This is my Martin Blogs!"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通过 <strong>const</strong> 关键字来进行常量的定义。</p>
+<p>通过在函数体外部使用 <strong>var</strong> 关键字来进行全局变量的声明和赋值。</p>
+<p>通过 <strong>type</strong> 关键字来进行结构(struct)和接口(interface)以及一般类型的声明。</p>
+<p>通过 <strong>func</strong> 关键字来进行函数的声明。</p>
+<p>Go 程序是通过 <strong>package</strong> 来组织的，只有 <strong>package</strong> 名称为 <strong>main</strong> 的包可以包含 <strong>main</strong> 函数。</p>
+<p>一个可执行程序有且仅有一个 <strong>main</strong> 包。</p>
+<p>通过 <strong>import</strong> 关键字来导入其他非 <strong>main</strong> 包。</p>
+<p>可以通过 <strong>import</strong> 关键字单个导入:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">"io"</span></span><br></pre></td></tr></table></figure>
+<p>也可以通过 <strong>import</strong> 关键字多个导入:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;</span><br><span class="line">    <span class="string">"fmt"</span>,</span><br><span class="line">    <span class="string">"io"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="可见性规则"><a href="#可见性规则" class="headerlink" title="可见性规则"></a>可见性规则</h3><p>Go语言中，使用大小写来决定该常量、变量、类型、接口、结构或函数是否可以被外部包所调用。</p>
+<ul>
+<li>函数名首字母小写即为 <strong>private</strong> ，变量同理</li>
+<li>函数名首字母大写即为 <strong>public</strong> ，变量同理</li>
 </ul>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>Go语言接受了函数式编程的一些想法，支持匿名函数与闭包。再如，Go语言接受了以Erlang语言为代表的面向消息编程思想，支持goroutine和通道，并推荐使用消息而不是共享内存来进行并发编程。总体来说，Go语言是一个非常现代化的语言，精小但非常强大。</p>
 
       
     </div>
@@ -509,14 +526,18 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2018/10/25/Go2/" rel="next" title="Go语言学习之旅（2）语言结构">
+                <i class="fa fa-chevron-left"></i> Go语言学习之旅（2）语言结构
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/10/23/Go语言学习之旅（2）语言结构/" rel="prev" title="">
-                 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/10/25/Go4/" rel="prev" title="Go语言学习之旅（4）数据类型">
+                Go语言学习之旅（4）数据类型 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -589,7 +610,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-count">10</span>
                     <span class="site-state-item-name">文章</span>
                   </a>
                 </div>
@@ -697,7 +718,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Go语言历史"><span class="nav-number">1.</span> <span class="nav-text">Go语言历史</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Go-语言特色"><span class="nav-number">2.</span> <span class="nav-text">Go 语言特色</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Go-语言用途"><span class="nav-number">3.</span> <span class="nav-text">Go 语言用途</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Go语言安装"><span class="nav-number">4.</span> <span class="nav-text">Go语言安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第一个Go程序"><span class="nav-number">5.</span> <span class="nav-text">第一个Go程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Go-语言最主要的特性："><span class="nav-number">6.</span> <span class="nav-text">Go 语言最主要的特性：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Go标记"><span class="nav-number">1.</span> <span class="nav-text">Go标记</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#行分隔符"><span class="nav-number">2.</span> <span class="nav-text">行分隔符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注释"><span class="nav-number">3.</span> <span class="nav-text">注释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#标识符"><span class="nav-number">4.</span> <span class="nav-text">标识符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Go语言的空格"><span class="nav-number">5.</span> <span class="nav-text">Go语言的空格</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Go语言程序的一般结构："><span class="nav-number">6.</span> <span class="nav-text">Go语言程序的一般结构：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#可见性规则"><span class="nav-number">6.1.</span> <span class="nav-text">可见性规则</span></a></li></ol></li></ol></div>
             
 
           </div>

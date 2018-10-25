@@ -108,25 +108,25 @@
 
 
 
-  <meta name="description" content="Go语言变量变量来源于数学，是计算机语言中能储存计算结果或能表示值抽象概念。变量可以通过变量名访问。 Go 语言变量名由字母、数字、下划线组成，其中首个字母不能为数字。 声明变量的一般形式是使用 var 关键字： 1var name type 变量声明 指定变量类型，声明后若不赋值，使用默认值。  1var g_name g_type  根据值自行判定变量类型  1var g_name=&quot;&quot;  省">
+  <meta name="description" content="Go语言历史​    Go 是一个开源的编程语言，它能让构造简单、可靠且高效的软件变得容易。 ​    Go是从2007年末由Robert Griesemer, Rob Pike, Ken Thompson主持开发，后来还加入了Ian Lance Taylor, Russ Cox等人，并最终于2009年11月开源，在2012年早些时候发布了Go 1稳定版本。现在Go的开发已经是完全开放的，并且拥有">
 <meta name="keywords" content="Go语言基础">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Go语言学习之旅（5）变量">
-<meta property="og:url" content="http://yoursite.com/2018/10/23/Go语言学习之旅（5）变量/index.html">
+<meta property="og:title" content="Go语言学习之旅（1）概述">
+<meta property="og:url" content="http://yoursite.com/2018/10/25/Go1/index.html">
 <meta property="og:site_name" content="Martin Blogs">
-<meta property="og:description" content="Go语言变量变量来源于数学，是计算机语言中能储存计算结果或能表示值抽象概念。变量可以通过变量名访问。 Go 语言变量名由字母、数字、下划线组成，其中首个字母不能为数字。 声明变量的一般形式是使用 var 关键字： 1var name type 变量声明 指定变量类型，声明后若不赋值，使用默认值。  1var g_name g_type  根据值自行判定变量类型  1var g_name=&quot;&quot;  省">
+<meta property="og:description" content="Go语言历史​    Go 是一个开源的编程语言，它能让构造简单、可靠且高效的软件变得容易。 ​    Go是从2007年末由Robert Griesemer, Rob Pike, Ken Thompson主持开发，后来还加入了Ian Lance Taylor, Russ Cox等人，并最终于2009年11月开源，在2012年早些时候发布了Go 1稳定版本。现在Go的开发已经是完全开放的，并且拥有">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-10-23T07:00:17.945Z">
+<meta property="og:updated_time" content="2018-10-25T11:57:26.466Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Go语言学习之旅（5）变量">
-<meta name="twitter:description" content="Go语言变量变量来源于数学，是计算机语言中能储存计算结果或能表示值抽象概念。变量可以通过变量名访问。 Go 语言变量名由字母、数字、下划线组成，其中首个字母不能为数字。 声明变量的一般形式是使用 var 关键字： 1var name type 变量声明 指定变量类型，声明后若不赋值，使用默认值。  1var g_name g_type  根据值自行判定变量类型  1var g_name=&quot;&quot;  省">
+<meta name="twitter:title" content="Go语言学习之旅（1）概述">
+<meta name="twitter:description" content="Go语言历史​    Go 是一个开源的编程语言，它能让构造简单、可靠且高效的软件变得容易。 ​    Go是从2007年末由Robert Griesemer, Rob Pike, Ken Thompson主持开发，后来还加入了Ian Lance Taylor, Russ Cox等人，并最终于2009年11月开源，在2012年早些时候发布了Go 1稳定版本。现在Go的开发已经是完全开放的，并且拥有">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/10/23/Go语言学习之旅（5）变量/">
+  <link rel="canonical" href="http://yoursite.com/2018/10/25/Go1/">
 
 
 
@@ -136,7 +136,7 @@
   };
 </script>
 
-  <title>Go语言学习之旅（5）变量 | Martin Blogs</title>
+  <title>Go语言学习之旅（1）概述 | Martin Blogs</title>
   
 
 
@@ -317,7 +317,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/23/Go语言学习之旅（5）变量/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/25/Go1/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Martin（中文名：刘国江）">
@@ -334,7 +334,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Go语言学习之旅（5）变量
+          <h1 class="post-title" itemprop="name headline">Go语言学习之旅（1）概述
               
             
           </h1>
@@ -359,7 +359,7 @@
                 
               
 
-              <time title="创建时间：2018-10-23 13:58:50 / 修改时间：15:00:17" itemprop="dateCreated datePublished" datetime="2018-10-23T13:58:50+08:00">2018-10-23</time>
+              <time title="创建时间：2018-10-25 19:40:53 / 修改时间：19:57:26" itemprop="dateCreated datePublished" datetime="2018-10-25T19:40:53+08:00">2018-10-25</time>
             
 
             
@@ -415,25 +415,29 @@
       
 
       
-        <h2 id="Go语言变量"><a href="#Go语言变量" class="headerlink" title="Go语言变量"></a>Go语言变量</h2><p>变量来源于数学，是计算机语言中能储存计算结果或能表示值抽象概念。变量可以通过变量名访问。</p>
-<p>Go 语言变量名由字母、数字、下划线组成，其中首个字母不能为数字。</p>
-<p>声明变量的一般形式是使用 var 关键字：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name <span class="keyword">type</span></span><br></pre></td></tr></table></figure>
-<h3 id="变量声明"><a href="#变量声明" class="headerlink" title="变量声明"></a>变量声明</h3><ol>
-<li>指定变量类型，声明后若不赋值，使用默认值。</li>
-</ol>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> g_name g_type</span><br></pre></td></tr></table></figure>
-<ol>
-<li>根据值自行判定变量类型</li>
-</ol>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> g_name=<span class="string">""</span></span><br></pre></td></tr></table></figure>
-<ol>
-<li>省略var, 注意 :=左侧的变量不应该是已经声明过的，否则会导致编译错误。</li>
-</ol>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">g_name := value</span><br><span class="line"></span><br><span class="line"><span class="comment">// 例如</span></span><br><span class="line"><span class="keyword">var</span> a <span class="keyword">int</span> = <span class="number">10</span></span><br><span class="line"><span class="keyword">var</span> b = <span class="number">10</span></span><br><span class="line">c := <span class="number">10</span></span><br></pre></td></tr></table></figure>
-<p>实例如下：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">		<span class="keyword">var</span> one=<span class="string">"马丁博客"</span></span><br><span class="line">		<span class="keyword">var</span> two <span class="keyword">string</span>=<span class="string">"马丁博客"</span></span><br><span class="line">		<span class="keyword">var</span> three <span class="keyword">bool</span></span><br><span class="line">    fmt.Println(one,two,three)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>输出为：</p>
+        <h2 id="Go语言历史"><a href="#Go语言历史" class="headerlink" title="Go语言历史"></a>Go语言历史</h2><p>​    Go 是一个开源的编程语言，它能让构造简单、可靠且高效的软件变得容易。</p>
+<p>​    Go是从2007年末由Robert Griesemer, Rob Pike, Ken Thompson主持开发，后来还加入了Ian Lance Taylor, Russ Cox等人，并最终于2009年11月开源，在2012年早些时候发布了Go 1稳定版本。现在Go的开发已经是完全开放的，并且拥有一个活跃的社区 。</p>
+<h2 id="Go-语言特色"><a href="#Go-语言特色" class="headerlink" title="Go 语言特色"></a>Go 语言特色</h2><ul>
+<li>简洁、快速、安全</li>
+<li>并行、有趣、开源</li>
+<li>内存管理、数组安全、编译迅速</li>
+</ul>
+<h2 id="Go-语言用途"><a href="#Go-语言用途" class="headerlink" title="Go 语言用途"></a>Go 语言用途</h2><p>Go 语言被设计成一门应用于搭载 Web 服务器，存储集群或类似用途的巨型中央服务器的系统编程语言。对于高性能分布式系统领域而言，Go 语言无疑比大多数其它语言有着更高的开发效率。它提供了海量并行的支持，这对于游戏服务端的开发而言是再好不过了。</p>
+<h2 id="Go语言安装"><a href="#Go语言安装" class="headerlink" title="Go语言安装"></a>Go语言安装</h2><p>本人使用的是windows系统，所以使用的是msi文件安装，安装很简单，具体安装步骤可参考这篇博客：<a href="https://blog.csdn.net/hhtnan/article/details/78562085" target="_blank" rel="noopener">https://blog.csdn.net/hhtnan/article/details/78562085</a></p>
+<h2 id="第一个Go程序"><a href="#第一个Go程序" class="headerlink" title="第一个Go程序"></a>第一个Go程序</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    fmt.Println(<span class="string">"Hello, World!"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ go run hello.go </span><br><span class="line">Hello, World!</span><br></pre></td></tr></table></figure>
+<h2 id="Go-语言最主要的特性："><a href="#Go-语言最主要的特性：" class="headerlink" title="Go 语言最主要的特性："></a>Go 语言最主要的特性：</h2><ul>
+<li>自动垃圾回收</li>
+<li>更丰富的内置类型</li>
+<li>函数多返回值</li>
+<li>错误处理</li>
+<li>匿名函数和闭包</li>
+<li>类型和接口</li>
+<li>并发编程</li>
+<li>反射</li>
+<li>语言交互性</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>Go语言接受了函数式编程的一些想法，支持匿名函数与闭包。再如，Go语言接受了以Erlang语言为代表的面向消息编程思想，支持goroutine和通道，并推荐使用消息而不是共享内存来进行并发编程。总体来说，Go语言是一个非常现代化的语言，精小但非常强大。</p>
 
       
     </div>
@@ -505,18 +509,14 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/10/23/Go语言学习之旅（4）数据类型/" rel="next" title="Go语言学习之旅（4）数据类型">
-                <i class="fa fa-chevron-left"></i> Go语言学习之旅（4）数据类型
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/10/23/Go语言学习之旅（6）常量/" rel="prev" title="Go语言学习之旅（6）常量">
-                Go语言学习之旅（6）常量 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/10/25/Go2/" rel="prev" title="Go语言学习之旅（2）语言结构">
+                Go语言学习之旅（2）语言结构 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -589,7 +589,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-count">10</span>
                     <span class="site-state-item-name">文章</span>
                   </a>
                 </div>
@@ -697,7 +697,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Go语言变量"><span class="nav-number">1.</span> <span class="nav-text">Go语言变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#变量声明"><span class="nav-number">1.1.</span> <span class="nav-text">变量声明</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Go语言历史"><span class="nav-number">1.</span> <span class="nav-text">Go语言历史</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Go-语言特色"><span class="nav-number">2.</span> <span class="nav-text">Go 语言特色</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Go-语言用途"><span class="nav-number">3.</span> <span class="nav-text">Go 语言用途</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Go语言安装"><span class="nav-number">4.</span> <span class="nav-text">Go语言安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第一个Go程序"><span class="nav-number">5.</span> <span class="nav-text">第一个Go程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Go-语言最主要的特性："><span class="nav-number">6.</span> <span class="nav-text">Go 语言最主要的特性：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>

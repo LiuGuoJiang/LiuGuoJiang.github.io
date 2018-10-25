@@ -313,7 +313,565 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/23/Go语言学习之旅（8）条件语句/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/25/Go10/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Martin（中文名：刘国江）">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/touxiang3.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Martin Blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Go语言学习之旅（10）函数
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-10-25 20:30:10 / 修改时间：20:42:39" itemprop="dateCreated datePublished" datetime="2018-10-25T20:30:10+08:00">2018-10-25</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/go/" itemprop="url" rel="index"><span itemprop="name">go</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+          
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Go语言函数"><a href="#Go语言函数" class="headerlink" title="Go语言函数"></a>Go语言函数</h2><ul>
+<li><p>函数是基本的代码块，用于执行一个任务。</p>
+</li>
+<li><p>Go 语言最少有个 main() 函数。</p>
+</li>
+<li><p>可以通过函数来划分不同功能，逻辑上每个函数执行的是指定的任务。</p>
+</li>
+<li><p>函数声明告诉了编译器函数的名称，返回类型，和参数。</p>
+</li>
+<li><p>Go 语言标准库提供了多种可动用的内置的函数。例如，len() 函数可以接受不同类型参数并返回该类型的长度。如果我们传入的是字符串则返回字符串的长度，如果传入的是数组，则返回数组中包含的元素个数。</p>
+</li>
+</ul>
+<h2 id="函数定义"><a href="#函数定义" class="headerlink" title="函数定义"></a>函数定义</h2><p>Go 语言函数定义格式如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">function_name</span><span class="params">( [parameter list] )</span> [<span class="title">return_types</span>]</span> &#123;</span><br><span class="line">   函数体</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>函数定义解析：</p>
+<ul>
+<li><strong>func</strong>：函数由 func 开始声明</li>
+<li><strong>function_name</strong>：函数名称，函数名和参数列表一起构成了函数签名。</li>
+<li><strong>parameter list</strong>：参数列表，参数就像一个占位符，当函数被调用时，你可以将值传递给参数，这个值被称为实际参数。参数列表指定的是参数类型、顺序、及参数个数。参数是可选的，也就是说函数也可以不包含参数。</li>
+<li><strong>return_types</strong>：返回类型，函数返回一列值。return_types 是该列值的数据类型。有些功能不需要返回值，这种情况下 return_types 不是必须的。</li>
+<li><strong>函数体</strong>：函数定义的代码集合。</li>
+</ul>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>以下实例为 max() 函数的代码，该函数传入两个整型参数 num1 和 num2，并返回这两个参数的最大值：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 函数返回两个数的最大值 */</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">max</span><span class="params">(num1, num2 <span class="keyword">int</span>)</span> <span class="title">int</span></span> &#123;</span><br><span class="line">   <span class="comment">/* 声明局部变量 */</span></span><br><span class="line">   <span class="keyword">var</span> result <span class="keyword">int</span></span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> (num1 &gt; num2) &#123;</span><br><span class="line">      result = num1</span><br><span class="line">   &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      result = num2</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">return</span> result </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="函数调用"><a href="#函数调用" class="headerlink" title="函数调用"></a>函数调用</h2><p>当创建函数时，你定义了函数需要做什么，通过调用该函数来执行指定任务。</p>
+<p>调用函数，向函数传递参数，并返回值，例如：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">   <span class="comment">/* 定义局部变量 */</span></span><br><span class="line">   <span class="keyword">var</span> a <span class="keyword">int</span> = <span class="number">100</span></span><br><span class="line">   <span class="keyword">var</span> b <span class="keyword">int</span> = <span class="number">200</span></span><br><span class="line">   <span class="keyword">var</span> ret <span class="keyword">int</span></span><br><span class="line"></span><br><span class="line">   <span class="comment">/* 调用函数并返回最大值 */</span></span><br><span class="line">   ret = max(a, b)</span><br><span class="line"></span><br><span class="line">   fmt.Printf( <span class="string">"最大值是 : %d\n"</span>, ret )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 函数返回两个数的最大值 */</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">max</span><span class="params">(num1, num2 <span class="keyword">int</span>)</span> <span class="title">int</span></span> &#123;</span><br><span class="line">   <span class="comment">/* 定义局部变量 */</span></span><br><span class="line">   <span class="keyword">var</span> result <span class="keyword">int</span></span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> (num1 &gt; num2) &#123;</span><br><span class="line">      result = num1</span><br><span class="line">   &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      result = num2</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">return</span> result </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上实例在 main() 函数中调用 max（）函数，执行结果为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">最大值是 : 200</span><br></pre></td></tr></table></figure>
+<h2 id="函数返回多个值"><a href="#函数返回多个值" class="headerlink" title="函数返回多个值"></a>函数返回多个值</h2><p>Go 函数可以返回多个值，例如：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">swap</span><span class="params">(x, y <span class="keyword">string</span>)</span> <span class="params">(<span class="keyword">string</span>, <span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line">   <span class="keyword">return</span> y, x</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">   a, b := swap(<span class="string">"Mahesh"</span>, <span class="string">"Kumar"</span>)</span><br><span class="line">   fmt.Println(a, b)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上实例执行结果为：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Kumar Mahesh</span><br></pre></td></tr></table></figure>
+<h2 id="函数参数"><a href="#函数参数" class="headerlink" title="函数参数"></a>函数参数</h2><p>函数如果使用参数，该变量可称为函数的形参。</p>
+<p>形参就像定义在函数体内的局部变量。</p>
+<p>调用函数，可以通过两种方式来传递参数：</p>
+<table>
+<thead>
+<tr>
+<th>传递类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="http://www.runoob.com/go/go-function-call-by-value.html" target="_blank" rel="noopener">值传递</a></td>
+<td>值传递是指在调用函数时将实际参数复制一份传递到函数中，这样在函数中如果对参数进行修改，将不会影响到实际参数。</td>
+</tr>
+<tr>
+<td><a href="http://www.runoob.com/go/go-function-call-by-reference.html" target="_blank" rel="noopener">引用传递</a></td>
+<td>引用传递是指在调用函数时将实际参数的地址传递到函数中，那么在函数中对参数所进行的修改，将影响到实际参数。</td>
+</tr>
+</tbody>
+</table>
+<p>默认情况下，Go 语言使用的是值传递，即在调用过程中不会影响到实际参数。</p>
+<h2 id="函数用法"><a href="#函数用法" class="headerlink" title="函数用法"></a>函数用法</h2><table>
+<thead>
+<tr>
+<th>函数用法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="http://www.runoob.com/go/go-function-as-values.html" target="_blank" rel="noopener">函数作为值</a></td>
+<td>函数定义后可作为值来使用</td>
+</tr>
+<tr>
+<td><a href="http://www.runoob.com/go/go-function-closures.html" target="_blank" rel="noopener">闭包</a></td>
+<td>闭包是匿名函数，可在动态编程中使用</td>
+</tr>
+<tr>
+<td><a href="http://www.runoob.com/go/go-method.html" target="_blank" rel="noopener">方法</a></td>
+<td>方法就是一个包含了接受者的函数</td>
+</tr>
+</tbody>
+</table>
+<h2 id="编程小练习1：杨辉三角形"><a href="#编程小练习1：杨辉三角形" class="headerlink" title="编程小练习1：杨辉三角形:"></a>编程小练习1：<strong>杨辉三角形:</strong></h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//行数</span></span><br><span class="line"><span class="keyword">const</span> LINES <span class="keyword">int</span> = <span class="number">10</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 杨辉三角</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">ShowYangHuiTriangle</span><span class="params">()</span></span> &#123;</span><br><span class="line">    nums := []<span class="keyword">int</span>&#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; LINES; i++ &#123;</span><br><span class="line">        <span class="comment">//补空白</span></span><br><span class="line">        <span class="keyword">for</span> j := <span class="number">0</span>; j &lt; (LINES - i); j++ &#123;</span><br><span class="line">            fmt.Print(<span class="string">" "</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> j := <span class="number">0</span>; j &lt; (i + <span class="number">1</span>); j++ &#123;</span><br><span class="line">            <span class="keyword">var</span> length = <span class="built_in">len</span>(nums)</span><br><span class="line">            <span class="keyword">var</span> value <span class="keyword">int</span></span><br><span class="line">            <span class="keyword">if</span> j == <span class="number">0</span> || j == i &#123;</span><br><span class="line">                value = <span class="number">1</span></span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                value = nums[length-i] + nums[length-i<span class="number">-1</span>]</span><br><span class="line">            &#125;</span><br><span class="line">            nums = <span class="built_in">append</span>(nums, value)</span><br><span class="line">            fmt.Print(value, <span class="string">" "</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        fmt.Println(<span class="string">""</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    ShowYangHuiTriangle()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>执行输出结果为：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">         <span class="number">1</span> </span><br><span class="line">        <span class="number">1</span> <span class="number">1</span> </span><br><span class="line">       <span class="number">1</span> <span class="number">2</span> <span class="number">1</span> </span><br><span class="line">      <span class="number">1</span> <span class="number">3</span> <span class="number">3</span> <span class="number">1</span> </span><br><span class="line">     <span class="number">1</span> <span class="number">4</span> <span class="number">6</span> <span class="number">4</span> <span class="number">1</span> </span><br><span class="line">    <span class="number">1</span> <span class="number">5</span> <span class="number">10</span> <span class="number">10</span> <span class="number">5</span> <span class="number">1</span> </span><br><span class="line">   <span class="number">1</span> <span class="number">6</span> <span class="number">15</span> <span class="number">20</span> <span class="number">15</span> <span class="number">6</span> <span class="number">1</span> </span><br><span class="line">  <span class="number">1</span> <span class="number">7</span> <span class="number">21</span> <span class="number">35</span> <span class="number">35</span> <span class="number">21</span> <span class="number">7</span> <span class="number">1</span> </span><br><span class="line"> <span class="number">1</span> <span class="number">8</span> <span class="number">28</span> <span class="number">56</span> <span class="number">70</span> <span class="number">56</span> <span class="number">28</span> <span class="number">8</span> <span class="number">1</span> </span><br><span class="line"><span class="number">1</span> <span class="number">9</span> <span class="number">36</span> <span class="number">84</span> <span class="number">126</span> <span class="number">126</span> <span class="number">84</span> <span class="number">36</span> <span class="number">9</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<h2 id="编程小练习2：九九乘法表"><a href="#编程小练习2：九九乘法表" class="headerlink" title="编程小练习2：九九乘法表"></a>编程小练习2：九九乘法表</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"strconv"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">add</span><span class="params">(a, b <span class="keyword">int</span>)</span> <span class="title">int</span></span> &#123;</span><br><span class="line">    <span class="keyword">return</span> a + b</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">multiplicationTable</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">1</span>; i &lt;= <span class="number">9</span>; i++ &#123;</span><br><span class="line">        <span class="keyword">for</span> j := <span class="number">1</span>; j &lt;= i; j++ &#123;</span><br><span class="line">            <span class="keyword">var</span> ret <span class="keyword">string</span></span><br><span class="line">            <span class="keyword">if</span> i*j &lt; <span class="number">10</span> &amp;&amp; j != <span class="number">1</span> &#123;</span><br><span class="line">                ret = <span class="string">" "</span> + strconv.Itoa(i*j)</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                ret = strconv.Itoa(i * j)</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            fmt.Print(j, <span class="string">" * "</span>, i, <span class="string">" = "</span>, ret, <span class="string">"   "</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        fmt.Print(<span class="string">"\n"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    multiplicationTable()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>执行输出为：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> * <span class="number">1</span> = <span class="number">1</span></span><br><span class="line"><span class="number">1</span> * <span class="number">2</span> = <span class="number">2</span>   <span class="number">2</span> * <span class="number">2</span> =  <span class="number">4</span></span><br><span class="line"><span class="number">1</span> * <span class="number">3</span> = <span class="number">3</span>   <span class="number">2</span> * <span class="number">3</span> =  <span class="number">6</span>   <span class="number">3</span> * <span class="number">3</span> =  <span class="number">9</span></span><br><span class="line"><span class="number">1</span> * <span class="number">4</span> = <span class="number">4</span>   <span class="number">2</span> * <span class="number">4</span> =  <span class="number">8</span>   <span class="number">3</span> * <span class="number">4</span> = <span class="number">12</span>   <span class="number">4</span> * <span class="number">4</span> = <span class="number">16</span></span><br><span class="line"><span class="number">1</span> * <span class="number">5</span> = <span class="number">5</span>   <span class="number">2</span> * <span class="number">5</span> = <span class="number">10</span>   <span class="number">3</span> * <span class="number">5</span> = <span class="number">15</span>   <span class="number">4</span> * <span class="number">5</span> = <span class="number">20</span>   <span class="number">5</span> * <span class="number">5</span> = <span class="number">25</span></span><br><span class="line"><span class="number">1</span> * <span class="number">6</span> = <span class="number">6</span>   <span class="number">2</span> * <span class="number">6</span> = <span class="number">12</span>   <span class="number">3</span> * <span class="number">6</span> = <span class="number">18</span>   <span class="number">4</span> * <span class="number">6</span> = <span class="number">24</span>   <span class="number">5</span> * <span class="number">6</span> = <span class="number">30</span>   <span class="number">6</span> * <span class="number">6</span> = <span class="number">36</span></span><br><span class="line"><span class="number">1</span> * <span class="number">7</span> = <span class="number">7</span>   <span class="number">2</span> * <span class="number">7</span> = <span class="number">14</span>   <span class="number">3</span> * <span class="number">7</span> = <span class="number">21</span>   <span class="number">4</span> * <span class="number">7</span> = <span class="number">28</span>   <span class="number">5</span> * <span class="number">7</span> = <span class="number">35</span>   <span class="number">6</span> * <span class="number">7</span> = <span class="number">42</span>   <span class="number">7</span> * <span class="number">7</span> = <span class="number">49</span></span><br><span class="line"><span class="number">1</span> * <span class="number">8</span> = <span class="number">8</span>   <span class="number">2</span> * <span class="number">8</span> = <span class="number">16</span>   <span class="number">3</span> * <span class="number">8</span> = <span class="number">24</span>   <span class="number">4</span> * <span class="number">8</span> = <span class="number">32</span>   <span class="number">5</span> * <span class="number">8</span> = <span class="number">40</span>   <span class="number">6</span> * <span class="number">8</span> = <span class="number">48</span>   <span class="number">7</span> * <span class="number">8</span> = <span class="number">56</span>   <span class="number">8</span> * <span class="number">8</span> = <span class="number">64</span></span><br><span class="line"><span class="number">1</span> * <span class="number">9</span> = <span class="number">9</span>   <span class="number">2</span> * <span class="number">9</span> = <span class="number">18</span>   <span class="number">3</span> * <span class="number">9</span> = <span class="number">27</span>   <span class="number">4</span> * <span class="number">9</span> = <span class="number">36</span>   <span class="number">5</span> * <span class="number">9</span> = <span class="number">45</span>   <span class="number">6</span> * <span class="number">9</span> = <span class="number">54</span>   <span class="number">7</span> * <span class="number">9</span> = <span class="number">63</span>   <span class="number">8</span> * <span class="number">9</span> = <span class="number">72</span> <span class="number">9</span> * <span class="number">9</span> = <span class="number">81</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+    
+      <div>
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      </div>
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>赞赏支持</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/weixin.jpg" alt="Martin（中文名：刘国江） 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/zhifubao.jpg" alt="Martin（中文名：刘国江） 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Go语言基础/" rel="tag"><i class="fa fa-tag"></i> Go语言基础</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/25/Go9/" rel="next" title="Go语言学习之旅（9）循环语句">
+                <i class="fa fa-chevron-left"></i> Go语言学习之旅（9）循环语句
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/25/Go9/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Martin（中文名：刘国江）">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/touxiang3.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Martin Blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Go语言学习之旅（9）循环语句
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-10-25 19:52:00 / 修改时间：20:29:40" itemprop="dateCreated datePublished" datetime="2018-10-25T19:52:00+08:00">2018-10-25</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/go/" itemprop="url" rel="index"><span itemprop="name">go</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+          
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Go-语言循环语句"><a href="#Go-语言循环语句" class="headerlink" title="Go 语言循环语句"></a>Go 语言循环语句</h2><p>在不少实际问题中有许多具有规律性的重复操作，因此在程序中就需要重复执行某些语句</p>
+<p><img src="/2018/10/25/Go9/1.png" alt="1"></p>
+<p>Go 语言提供了以下几种类型循环处理语句：</p>
+<table>
+<thead>
+<tr>
+<th>循环类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="http://www.runoob.com/go/go-for-loop.html" target="_blank" rel="noopener">for 循环</a></td>
+<td>重复执行语句块</td>
+</tr>
+<tr>
+<td><a href="http://www.runoob.com/go/go-nested-loops.html" target="_blank" rel="noopener">循环嵌套</a></td>
+<td>在 for 循环中嵌套一个或多个 for 循环</td>
+</tr>
+</tbody>
+</table>
+<p>循环控制语句可以控制循环体内语句的执行过程。</p>
+<p>GO 语言支持以下几种循环控制语句：</p>
+<table>
+<thead>
+<tr>
+<th>控制语句</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="http://www.runoob.com/go/go-break-statement.html" target="_blank" rel="noopener">break 语句</a></td>
+<td>经常用于中断当前 for 循环或跳出 switch 语句</td>
+</tr>
+<tr>
+<td><a href="http://www.runoob.com/go/go-continue-statement.html" target="_blank" rel="noopener">continue 语句</a></td>
+<td>跳过当前循环的剩余语句，然后继续进行下一轮循环。</td>
+</tr>
+<tr>
+<td><a href="http://www.runoob.com/go/go-goto-statement.html" target="_blank" rel="noopener">goto 语句</a></td>
+<td>将控制转移到被标记的语句。</td>
+</tr>
+</tbody>
+</table>
+<p>如过循环中条件语句永远不为 false 则会进行无限循环，我们可以通过 for 循环语句中只设置一个条件表达式来执行无限循环：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">for</span> <span class="literal">true</span>  &#123;</span><br><span class="line">        fmt.Printf(<span class="string">"这是无限循环。\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="编程小练习1：输出1-100素数"><a href="#编程小练习1：输出1-100素数" class="headerlink" title="编程小练习1：输出1-100素数"></a>编程小练习1：输出1-100素数</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main </span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>  &#123;</span><br><span class="line">	<span class="keyword">var</span> m,k <span class="keyword">int</span> <span class="comment">//声明变量</span></span><br><span class="line"></span><br><span class="line">	m=<span class="number">1</span>	<span class="comment">/*这里不写入FOR循环是因为For语句执行之初会将a的值变为1，当我们goto A时for语句会重新执行（不是重新一轮循环）*/</span></span><br><span class="line"></span><br><span class="line">	A:<span class="keyword">for</span> m&lt;<span class="number">100</span>&#123;</span><br><span class="line">		m++</span><br><span class="line">		<span class="keyword">for</span> k=<span class="number">2</span>;k&lt;m;k++&#123;</span><br><span class="line">			<span class="keyword">if</span> m%k==<span class="number">0</span>&#123;</span><br><span class="line">				<span class="keyword">goto</span> A</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		fmt.Println(k,<span class="string">"是素数"</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>执行以上代码返回结果：</p>
+<p><img src="/2018/10/25/Go9/2.png" alt="2"></p>
+<h2 id="编程小练习2：99乘法表"><a href="#编程小练习2：99乘法表" class="headerlink" title="编程小练习2：99乘法表"></a>编程小练习2：99乘法表</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main </span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>  &#123;</span><br><span class="line">	<span class="keyword">for</span> i:=<span class="number">1</span>;i&lt;=<span class="number">9</span>;i++&#123;	<span class="comment">//i控制行，以及计算的最大值</span></span><br><span class="line">		<span class="keyword">for</span> j:=<span class="number">1</span>;j&lt;=i;j++&#123;</span><br><span class="line">			fmt.Printf(<span class="string">"%d*%d=%d "</span>,j,i,i*j)</span><br><span class="line">		&#125;</span><br><span class="line">		fmt.Println(<span class="string">""</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>执行以上代码返回：</p>
+<p><img src="/2018/10/25/Go9/3.png" alt="3"></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+    
+      <div>
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      </div>
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>赞赏支持</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/weixin.jpg" alt="Martin（中文名：刘国江） 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/zhifubao.jpg" alt="Martin（中文名：刘国江） 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Go语言基础/" rel="tag"><i class="fa fa-tag"></i> Go语言基础</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/25/Go8/" rel="next" title="Go语言学习之旅（8）条件语句">
+                <i class="fa fa-chevron-left"></i> Go语言学习之旅（8）条件语句
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/25/Go10/" rel="prev" title="Go语言学习之旅（10）函数">
+                Go语言学习之旅（10）函数 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/25/Go8/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Martin（中文名：刘国江）">
@@ -355,7 +913,7 @@
                 
               
 
-              <time title="创建时间：2018-10-23 17:36:54 / 修改时间：18:19:01" itemprop="dateCreated datePublished" datetime="2018-10-23T17:36:54+08:00">2018-10-23</time>
+              <time title="创建时间：2018-10-25 19:51:52 / 修改时间：20:06:18" itemprop="dateCreated datePublished" datetime="2018-10-25T19:51:52+08:00">2018-10-25</time>
             
 
             
@@ -565,7 +1123,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/10/23/Go语言学习之旅（7）运算符/" rel="next" title="Go语言学习之旅（7）运算符">
+              <a href="/2018/10/25/Go7/" rel="next" title="Go语言学习之旅（7）运算符">
                 <i class="fa fa-chevron-left"></i> Go语言学习之旅（7）运算符
               </a>
             
@@ -574,6 +1132,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/25/Go9/" rel="prev" title="Go语言学习之旅（9）循环语句">
+                Go语言学习之旅（9）循环语句 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -605,7 +1167,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/23/Go语言学习之旅（7）运算符/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/25/Go7/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Martin（中文名：刘国江）">
@@ -647,7 +1209,7 @@
                 
               
 
-              <time title="创建时间：2018-10-23 17:04:24 / 修改时间：17:26:47" itemprop="dateCreated datePublished" datetime="2018-10-23T17:04:24+08:00">2018-10-23</time>
+              <time title="创建时间：2018-10-25 19:51:43 / 修改时间：20:05:50" itemprop="dateCreated datePublished" datetime="2018-10-25T19:51:43+08:00">2018-10-25</time>
             
 
             
@@ -1152,7 +1714,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/10/23/Go语言学习之旅（6）常量/" rel="next" title="Go语言学习之旅（6）常量">
+              <a href="/2018/10/25/Go6/" rel="next" title="Go语言学习之旅（6）常量">
                 <i class="fa fa-chevron-left"></i> Go语言学习之旅（6）常量
               </a>
             
@@ -1162,7 +1724,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/10/23/Go语言学习之旅（8）条件语句/" rel="prev" title="Go语言学习之旅（8）条件语句">
+              <a href="/2018/10/25/Go8/" rel="prev" title="Go语言学习之旅（8）条件语句">
                 Go语言学习之旅（8）条件语句 <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -1196,7 +1758,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/23/Go语言学习之旅（6）常量/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/25/Go6/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Martin（中文名：刘国江）">
@@ -1238,7 +1800,7 @@
                 
               
 
-              <time title="创建时间：2018-10-23 15:30:48 / 修改时间：16:06:40" itemprop="dateCreated datePublished" datetime="2018-10-23T15:30:48+08:00">2018-10-23</time>
+              <time title="创建时间：2018-10-25 19:51:30 / 修改时间：20:05:14" itemprop="dateCreated datePublished" datetime="2018-10-25T19:51:30+08:00">2018-10-25</time>
             
 
             
@@ -1332,10 +1894,8 @@
 <p>iota 表示从 0 开始自动加 1，所以 i=1&lt;&lt;0, j=3&lt;&lt;1（<strong>&lt;&lt;</strong> 表示左移的意思），即：i=1, j=6，这没问题，关键在 k 和 l，从输出结果看 k=3&lt;&lt;2，l=3&lt;&lt;3。</p>
 <p>简单表述:</p>
 <ul>
-<li><p><strong>i=1</strong>：左移 0 位,不变仍为 1;</p>
-</li>
-<li><p><strong>j=3</strong>：左移 1 位,变为二进制 110, 即 6;</p>
-</li>
+<li><strong>i=1</strong>：左移 0 位,不变仍为 1;</li>
+<li><strong>j=3</strong>：左移 1 位,变为二进制 110, 即 6;</li>
 <li><strong>k=3</strong>：左移 2 位,变为二进制 1100, 即 12;</li>
 <li><strong>l=3</strong>：左移 3 位,变为二进制 11000,即 24。</li>
 </ul>
@@ -1413,7 +1973,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/10/23/Go语言学习之旅（5）变量/" rel="next" title="Go语言学习之旅（5）变量">
+              <a href="/2018/10/25/Go5/" rel="next" title="Go语言学习之旅（5）变量">
                 <i class="fa fa-chevron-left"></i> Go语言学习之旅（5）变量
               </a>
             
@@ -1423,7 +1983,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/10/23/Go语言学习之旅（7）运算符/" rel="prev" title="Go语言学习之旅（7）运算符">
+              <a href="/2018/10/25/Go7/" rel="prev" title="Go语言学习之旅（7）运算符">
                 Go语言学习之旅（7）运算符 <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -1457,7 +2017,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/23/Go语言学习之旅（5）变量/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/25/Go5/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Martin（中文名：刘国江）">
@@ -1499,7 +2059,7 @@
                 
               
 
-              <time title="创建时间：2018-10-23 13:58:50 / 修改时间：15:00:17" itemprop="dateCreated datePublished" datetime="2018-10-23T13:58:50+08:00">2018-10-23</time>
+              <time title="创建时间：2018-10-25 19:51:08 / 修改时间：20:04:35" itemprop="dateCreated datePublished" datetime="2018-10-25T19:51:08+08:00">2018-10-25</time>
             
 
             
@@ -1574,6 +2134,29 @@
 <p>实例如下：</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">		<span class="keyword">var</span> one=<span class="string">"马丁博客"</span></span><br><span class="line">		<span class="keyword">var</span> two <span class="keyword">string</span>=<span class="string">"马丁博客"</span></span><br><span class="line">		<span class="keyword">var</span> three <span class="keyword">bool</span></span><br><span class="line">    fmt.Println(one,two,three)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>输出为：</p>
+<p><img src="/2018/10/25/Go5/1.png" alt="1"></p>
+<h3 id="多变量声明"><a href="#多变量声明" class="headerlink" title="多变量声明"></a>多变量声明</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a,b,c=<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span></span><br><span class="line">q,w,e:=<span class="string">"4"</span>,<span class="string">"5"</span>,<span class="string">"6"</span>	<span class="comment">//出现在:=左侧的变量不应该是已经被声明过的，否则会导致编译错误</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 这种因式分解关键字的写法一般用于声明全局变量</span></span><br><span class="line"><span class="keyword">var</span> (</span><br><span class="line">    vname1 v_type1</span><br><span class="line">    vname2 v_type2</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>实例如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> x,y <span class="keyword">int</span></span><br><span class="line"><span class="keyword">var</span> (	<span class="comment">// 因式分解关键字的写法一般用于声明全局变量</span></span><br><span class="line">    m <span class="keyword">int</span></span><br><span class="line">    k <span class="keyword">bool</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a,b <span class="keyword">int</span>=<span class="number">3</span>,<span class="number">4</span></span><br><span class="line"><span class="keyword">var</span> d,f=<span class="number">123</span>,<span class="string">"string"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//这种不带声明格式的只能在函数体中出现</span></span><br><span class="line"><span class="comment">//g, h := 123, "hello"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    g,h:=<span class="number">456</span>,<span class="string">"hello world"</span></span><br><span class="line">    <span class="built_in">println</span>(x,y,a,b,d,f,g,h)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>执行以上代码返回：</p>
+<p><img src="/2018/10/25/Go5/2.png" alt="2"></p>
+<h2 id="值类型和引用类型"><a href="#值类型和引用类型" class="headerlink" title="值类型和引用类型"></a>值类型和引用类型</h2><p>所有像int、float、bool、和string这些基本类型都属于值类型，使用这些类型的变量直接指向存在内存中的值</p>
+<p><img src="/2018/10/25/Go5/3.png" alt="3"></p>
+<p>当使用等号 <code>=</code> 将一个变量的值赋值给另一个变量时，如：<code>j = i</code>，实际上是在内存中将 i 的值进行了拷贝：</p>
+<p><img src="/2018/10/25/Go5/4.png" alt="4"></p>
+<p>引用类型的变量 r1 存储的是 r1 的值所在的内存地址（数字），或内存地址中第一个字所在的位置</p>
+<p><img src="/2018/10/25/Go5/5.png" alt="5"></p>
+<p>这个内存地址为称之为指针，这个指针实际上也被存在另外的某一个字中。</p>
+<p>同一个引用类型的指针指向的多个字节可以是在连续的内存地址中（内存布局是连续的），这也是计算效率最高的一种存储形式；也可以将这些字分散存放在内存中，每个字都指示了下一个字所在的内存地址。</p>
+<p>当使用赋值语句 r2 = r1 时，只有引用（地址）被复制。</p>
+<p>如果 r1 的值被改变了，那么这个值的所有引用都会指向被修改后的内容，在这个例子中，r2 也会受到影响。</p>
+<h2 id="注意事项："><a href="#注意事项：" class="headerlink" title="注意事项："></a>注意事项：</h2><ul>
+<li>如果你声明了一个局部变量却没有在相同的代码块中使用它，会得到编译错误，例如下面这个例子当中的变量 a：</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">   <span class="keyword">var</span> a <span class="keyword">string</span> = <span class="string">"abc"</span></span><br><span class="line">   fmt.Println(<span class="string">"hello, world"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>全局变量是允许声明但不使用</li>
+</ul>
 
       
     </div>
@@ -1645,7 +2228,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/10/23/Go语言学习之旅（4）数据类型/" rel="next" title="Go语言学习之旅（4）数据类型">
+              <a href="/2018/10/25/Go4/" rel="next" title="Go语言学习之旅（4）数据类型">
                 <i class="fa fa-chevron-left"></i> Go语言学习之旅（4）数据类型
               </a>
             
@@ -1655,7 +2238,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/10/23/Go语言学习之旅（6）常量/" rel="prev" title="Go语言学习之旅（6）常量">
+              <a href="/2018/10/25/Go6/" rel="prev" title="Go语言学习之旅（6）常量">
                 Go语言学习之旅（6）常量 <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -1689,7 +2272,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/23/Go语言学习之旅（4）数据类型/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/25/Go4/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Martin（中文名：刘国江）">
@@ -1731,7 +2314,7 @@
                 
               
 
-              <time title="创建时间：2018-10-23 11:41:36 / 修改时间：14:26:13" itemprop="dateCreated datePublished" datetime="2018-10-23T11:41:36+08:00">2018-10-23</time>
+              <time title="创建时间：2018-10-25 19:50:39 / 修改时间：19:58:57" itemprop="dateCreated datePublished" datetime="2018-10-25T19:50:39+08:00">2018-10-25</time>
             
 
             
@@ -1987,8 +2570,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/10/23/Go语言学习之旅（3）语言基础语法/" rel="next" title="Go语言学习之旅（3）语言基础语法">
-                <i class="fa fa-chevron-left"></i> Go语言学习之旅（3）语言基础语法
+              <a href="/2018/10/25/Go3/" rel="next" title="Go语言学习之旅（3）基础语法">
+                <i class="fa fa-chevron-left"></i> Go语言学习之旅（3）基础语法
               </a>
             
           </div>
@@ -1997,7 +2580,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/10/23/Go语言学习之旅（5）变量/" rel="prev" title="Go语言学习之旅（5）变量">
+              <a href="/2018/10/25/Go5/" rel="prev" title="Go语言学习之旅（5）变量">
                 Go语言学习之旅（5）变量 <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -2031,7 +2614,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/23/Go语言学习之旅（3）语言基础语法/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/25/Go3/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Martin（中文名：刘国江）">
@@ -2048,7 +2631,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Go语言学习之旅（3）语言基础语法
+          <h1 class="post-title" itemprop="name headline">Go语言学习之旅（3）基础语法
               
             
           </h1>
@@ -2073,7 +2656,7 @@
                 
               
 
-              <time title="创建时间：2018-10-23 11:39:37 / 修改时间：14:26:11" itemprop="dateCreated datePublished" datetime="2018-10-23T11:39:37+08:00">2018-10-23</time>
+              <time title="创建时间：2018-10-25 19:50:24 / 修改时间：19:58:17" itemprop="dateCreated datePublished" datetime="2018-10-25T19:50:24+08:00">2018-10-25</time>
             
 
             
@@ -2240,8 +2823,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/10/23/Go语言学习之旅（2）语言结构/" rel="next" title="">
-                <i class="fa fa-chevron-left"></i> 
+              <a href="/2018/10/25/Go2/" rel="next" title="Go语言学习之旅（2）语言结构">
+                <i class="fa fa-chevron-left"></i> Go语言学习之旅（2）语言结构
               </a>
             
           </div>
@@ -2250,7 +2833,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/10/23/Go语言学习之旅（4）数据类型/" rel="prev" title="Go语言学习之旅（4）数据类型">
+              <a href="/2018/10/25/Go4/" rel="prev" title="Go语言学习之旅（4）数据类型">
                 Go语言学习之旅（4）数据类型 <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -2284,7 +2867,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/23/Go语言学习之旅（2）语言结构/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/25/Go2/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Martin（中文名：刘国江）">
@@ -2301,7 +2884,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h1 class="post-title" itemprop="name headline">Go语言学习之旅（2）语言结构
               
             
           </h1>
@@ -2326,7 +2909,7 @@
                 
               
 
-              <time title="创建时间：2018-10-23 11:38:04 / 修改时间：14:26:10" itemprop="dateCreated datePublished" datetime="2018-10-23T11:38:04+08:00">2018-10-23</time>
+              <time title="创建时间：2018-10-25 19:50:08 / 修改时间：19:56:47" itemprop="dateCreated datePublished" datetime="2018-10-25T19:50:08+08:00">2018-10-25</time>
             
 
             
@@ -2336,6 +2919,24 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/go/" itemprop="url" rel="index"><span itemprop="name">go</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -2383,7 +2984,7 @@
 </ol>
 <h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><p>{  不能单独放在一行，所以以下代码在运行时会产生错误：</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  <span class="comment">// 错误，&#123; 不能在单独的行上</span></span><br><span class="line">    fmt.Println(<span class="string">"Hello, World!"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="/2018/10/23/Go语言学习之旅（2）语言结构/Users\linyangchu\AppData\Roaming\Typora\typora-user-images\1539940559417.png" alt="1539940559417"></p>
+<p><img src="/2018/10/25/Go2/Go2.png" alt="Go2"></p>
 <p>在vscode中安装go扩展后，也会有错误提示</p>
 
       
@@ -2441,6 +3042,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/Go语言基础/" rel="tag"><i class="fa fa-tag"></i> Go语言基础</a>
+          
+        </div>
+      
 
       
       
@@ -2450,7 +3057,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/10/23/Go语言学习之旅（1）概述/" rel="next" title="Go语言学习之旅（1）概述">
+              <a href="/2018/10/25/Go1/" rel="next" title="Go语言学习之旅（1）概述">
                 <i class="fa fa-chevron-left"></i> Go语言学习之旅（1）概述
               </a>
             
@@ -2460,8 +3067,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/10/23/Go语言学习之旅（3）语言基础语法/" rel="prev" title="Go语言学习之旅（3）语言基础语法">
-                Go语言学习之旅（3）语言基础语法 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/10/25/Go3/" rel="prev" title="Go语言学习之旅（3）基础语法">
+                Go语言学习之旅（3）基础语法 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -2494,7 +3101,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/23/Go语言学习之旅（1）概述/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/25/Go1/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Martin（中文名：刘国江）">
@@ -2536,7 +3143,7 @@
                 
               
 
-              <time title="创建时间：2018-10-23 10:09:53 / 修改时间：14:26:08" itemprop="dateCreated datePublished" datetime="2018-10-23T10:09:53+08:00">2018-10-23</time>
+              <time title="创建时间：2018-10-25 19:40:53 / 修改时间：19:57:26" itemprop="dateCreated datePublished" datetime="2018-10-25T19:40:53+08:00">2018-10-25</time>
             
 
             
@@ -2692,8 +3299,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/10/23/Go语言学习之旅（2）语言结构/" rel="prev" title="">
-                 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/10/25/Go2/" rel="prev" title="Go语言学习之旅（2）语言结构">
+                Go语言学习之旅（2）语言结构 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -2756,7 +3363,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-count">10</span>
                     <span class="site-state-item-name">文章</span>
                   </a>
                 </div>
