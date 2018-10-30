@@ -313,6 +313,299 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/30/vueAndEchartforBar/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Martin（中文名：刘国江）">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/touxiang3.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Martin Blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Vue组件（1）使用Echarts绘制图表-柱状图/折线图
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-10-30 16:00:08 / 修改时间：19:12:56" itemprop="dateCreated datePublished" datetime="2018-10-30T16:00:08+08:00">2018-10-30</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Vue前端/" itemprop="url" rel="index"><span itemprop="name">Vue前端</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+          
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>​    最近工作中需要做一个自动配置报表的功能，需求目的是可以通过配置来适应产品对于报表需求的变更，不用重复更改代码。</p>
+<p>配置实现流程如下：</p>
+<ul>
+<li>配置报表所需的数据源</li>
+<li>选择筛选报表数据的参数</li>
+<li>生成报表页面</li>
+<li>生成展示页面（生成的报表通过选择放入展示页面）</li>
+</ul>
+<p>项目是通过前后端分离实现的，前端框架是Vue,配合Echart绘制相关图表，因为我也是第一次尝试写前端组件，所以这里写下文章记录下。</p>
+<p>特别提示：这里的组件不是通过webpack打包生成的插件，而是放在src/components文件夹下的组件</p>
+<h2 id="生成vue项目"><a href="#生成vue项目" class="headerlink" title="生成vue项目"></a>生成vue项目</h2><p>这里通过vue-cli工具初始化一个项目，开始这里，默认你都已经安装好vue相关环境以及工具，如果没有，请自行百度vue环境搭建教程</p>
+<h3 id="初始化项目"><a href="#初始化项目" class="headerlink" title="初始化项目"></a>初始化项目</h3><p>新建一个存放新项目的文件夹，例如我这里在d盘下建了一个名为VueAndEcharts的文件夹</p>
+<p><img src="/2018/10/30/vueAndEchartforBar/vueAndEchart1.png" alt="1"></p>
+<p>在上图中的地址框中直接输入cmd，则在当前路径下打开cmd.exe</p>
+<p><img src="/2018/10/30/vueAndEchartforBar/vueAndEchart2.png" alt="2"></p>
+<p>在上图中输入初始化项目的命令：<strong>vue init webpack vue_project</strong>(最后这个是我创建的项目文件夹的名字)，具体操作如下图：</p>
+<p><img src="/2018/10/30/vueAndEchartforBar/vueAndEchart3.png" alt="3"></p>
+<p>上面依次的步骤会让你输入:</p>
+<ol>
+<li>项目名称：我这里输入echartsdemo</li>
+<li>项目描述：this is a vue/echart demo</li>
+<li>项目作者：martin</li>
+<li>安装vue-route：选yes即可</li>
+<li>安装eslint到你的代码，这个是检查代码格式的，选yes即可</li>
+<li>后面的几个我暂时没管他，都选了no,不停回车，项目就创建成功了</li>
+</ol>
+<p>生成成功后项目结构如下：</p>
+<p><img src="/2018/10/30/vueAndEchartforBar/VueAndEchart4.png" alt="4"></p>
+<p>切换到项目根目录下，我这里是cd vueEchartsForReport 然后在在命令提示符中输入：npm i 此步骤安装vue项目需要的相关依赖包，（这一步也可以省略，直接输入npm run dev，也会安装相关依赖包）这部分依赖包在项目根目录下的package.json中可以看到，</p>
+<p>再输入：npm run dev，就可以启动项目了，</p>
+<p><img src="/2018/10/30/vueAndEchartforBar/5.png" alt="5"></p>
+<p>上图代表已经启动项目成功，在浏览器输入<a href="http://localhost:8080就可以看到项目helloworld页面了" target="_blank" rel="noopener">http://localhost:8080就可以看到项目helloworld页面了</a></p>
+<h2 id="组件开发"><a href="#组件开发" class="headerlink" title="组件开发"></a>组件开发</h2><p>在项目src/components文件夹下新建一个vue文件，</p>
+<p><img src="/2018/10/30/vueAndEchartforBar/6.png" alt="6"></p>
+<p>因为是一个demo,所以我这里命名为bardemo.vue，</p>
+<h3 id="1-模板文件代码"><a href="#1-模板文件代码" class="headerlink" title="1.模板文件代码"></a>1.模板文件代码</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"r-echarts-line"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"main"</span> <span class="attr">ref</span>=<span class="string">"mychart"</span> <span class="attr">style</span>=<span class="string">"width: 600px;height:400px;"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>以上代码是为绘制图表准备一个具备高宽的 DOM 容器，具体明细可参考echarts官方文档，传送门：<a href="http://echarts.baidu.com/tutorial.html#5%20%E5%88%86%E9%92%9F%E4%B8%8A%E6%89%8B%20ECharts" target="_blank" rel="noopener">echarts官方文档</a></p>
+<h3 id="2-安装echarts插件"><a href="#2-安装echarts插件" class="headerlink" title="2.安装echarts插件"></a>2.安装echarts插件</h3><p>在项目根目录下，输入命令：<strong>npm install echarts –save</strong>，安装成功后，在bardemo.vue文件中引入</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> echarts = <span class="built_in">require</span>(<span class="string">'echarts'</span>)</span><br><span class="line"><span class="keyword">import</span> _ <span class="keyword">from</span> <span class="string">'lodash'</span></span><br></pre></td></tr></table></figure>
+<p>我这里因为要使用lodash工具库的方法，所以这里也安装了lodash工具库，输入命令： npm install lodash –save即可安装，导入loadsh如上图：<strong>import _ from ‘lodash’</strong></p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  name: <span class="string">'bar-report'</span>,</span><br><span class="line">  props: &#123;</span><br><span class="line">    data: &#123;</span><br><span class="line">      required: <span class="literal">true</span>, <span class="comment">// 若是横轴，则此部分为x轴"数值"数据，若为纵轴，则此部分为y轴"数值"数据,此部分数据必传</span></span><br><span class="line">      <span class="keyword">type</span>: <span class="built_in">Object</span></span><br><span class="line">    &#125;,</span><br><span class="line">    title: &#123;</span><br><span class="line">      <span class="keyword">type</span>: <span class="built_in">Object</span> | <span class="built_in">String</span> <span class="comment">// 标题，可以只传入标题，其他属性使用默认值，也可自定义title属性，默认无标题</span></span><br><span class="line">    &#125;,</span><br><span class="line">    theme: &#123;</span><br><span class="line">      <span class="keyword">type</span>: <span class="built_in">String</span> <span class="comment">// dom参数属性，传入theme字符串，theme暂时支持dark和light两种，默认light</span></span><br><span class="line">    &#125;,</span><br><span class="line">    width: <span class="built_in">String</span>, <span class="comment">// dom的宽度，默认600</span></span><br><span class="line">    height: <span class="built_in">String</span>, <span class="comment">// dom的高度，默认400</span></span><br><span class="line">    barType: &#123;</span><br><span class="line">      <span class="keyword">type</span>: <span class="built_in">String</span> <span class="comment">// 柱状图类型/值为xAxis则显示横轴柱状图，值为yAxis则为纵轴柱状图，默认是yAxis</span></span><br><span class="line">    &#125;,</span><br><span class="line">    category: &#123;</span><br><span class="line">      required: <span class="literal">true</span>, <span class="comment">// 图表分类，如是纵轴，则是x轴的值</span></span><br><span class="line">      <span class="keyword">type</span>: <span class="built_in">Object</span></span><br><span class="line">    &#125;,</span><br><span class="line">    legend: &#123;</span><br><span class="line">      required: <span class="literal">true</span>, <span class="comment">// 必传，图表上方标识每个颜色柱/线代表什么意思</span></span><br><span class="line">      <span class="keyword">type</span>: <span class="built_in">Array</span></span><br><span class="line">    &#125;,</span><br><span class="line">    dataView: &#123;</span><br><span class="line">      <span class="keyword">type</span>: <span class="built_in">Boolean</span> <span class="comment">// 是否显示数据视图功能，默认不开启</span></span><br><span class="line">    &#125;,</span><br><span class="line">    magicType: &#123;</span><br><span class="line">      <span class="keyword">type</span>: <span class="built_in">Array</span> | <span class="built_in">String</span> <span class="comment">// 是否显示图表之间切换显示功能，默认不开启</span></span><br><span class="line">    &#125;,</span><br><span class="line">    restore: &#123;</span><br><span class="line">      <span class="keyword">type</span>: <span class="built_in">Boolean</span> <span class="comment">// 是否显示图表还原功能，默认不开启</span></span><br><span class="line">    &#125;,</span><br><span class="line">    saveAsImage: &#123;</span><br><span class="line">      <span class="keyword">type</span>: <span class="built_in">Boolean</span> <span class="comment">// 是否显示图表图表保存为图片功能，默认不开启</span></span><br><span class="line">    &#125;,</span><br><span class="line">    stack: &#123;</span><br><span class="line">      <span class="keyword">type</span>: <span class="built_in">String</span> <span class="comment">// 柱状图是否堆叠属性，默认不堆叠</span></span><br><span class="line">    &#125;,</span><br><span class="line">    seriesType: &#123;</span><br><span class="line">      <span class="keyword">type</span>: <span class="built_in">String</span> <span class="comment">// 控制是绘制柱状图，还是绘制折线图，”bar“:柱状图，”line“:折线图</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  data () &#123;</span><br><span class="line">    <span class="comment">// 默认title属性</span></span><br><span class="line">    <span class="keyword">let</span> baseTitle = &#123;</span><br><span class="line">      text: <span class="string">''</span>, <span class="comment">// 主标题</span></span><br><span class="line">      subtext: <span class="string">''</span>, <span class="comment">// 副标题</span></span><br><span class="line">      left: <span class="string">'left'</span>, <span class="comment">// 标题位置：left,center,right</span></span><br><span class="line">      textStyle: &#123;</span><br><span class="line">        <span class="comment">// 文字颜色</span></span><br><span class="line">        color: <span class="string">'#000000'</span>,</span><br><span class="line">        <span class="comment">// 字体风格,'normal','italic','oblique'</span></span><br><span class="line">        fontStyle: <span class="string">'normal'</span>,</span><br><span class="line">        <span class="comment">// 字体粗细 'normal','bold','bolder','lighter',100 | 200 | 300 | 400...</span></span><br><span class="line">        fontWeight: <span class="string">'bold'</span>,</span><br><span class="line">        <span class="comment">// 字体系列</span></span><br><span class="line">        fontFamily: <span class="string">'sans-serif'</span>,</span><br><span class="line">        <span class="comment">// 字体大小</span></span><br><span class="line">        fontSize: <span class="number">18</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 如果传入了title的值，则判断处理后重新赋值给baseTitle</span></span><br><span class="line">    <span class="keyword">const</span> tempTitle = <span class="keyword">this</span>.title</span><br><span class="line">    <span class="keyword">if</span> (tempTitle) &#123;</span><br><span class="line">      debugger</span><br><span class="line">      <span class="keyword">if</span> (<span class="keyword">typeof</span> (tempTitle) === <span class="string">'string'</span>) &#123;</span><br><span class="line">        baseTitle.text = tempTitle</span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> (tempTitle) === <span class="string">'object'</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (tempTitle.text) &#123;</span><br><span class="line">          baseTitle.text = tempTitle.text</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (tempTitle.subtext) &#123;</span><br><span class="line">          baseTitle.subtext = tempTitle.subtext</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (tempTitle.left) &#123;</span><br><span class="line">          baseTitle.left = tempTitle.left</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (tempTitle.textStyle) &#123;</span><br><span class="line">        <span class="comment">// 标题字体颜色</span></span><br><span class="line">          <span class="keyword">if</span> (tempTitle.textStyle.color) &#123;</span><br><span class="line">            baseTitle.textStyle.color = tempTitle.textStyle.color</span><br><span class="line">          &#125;</span><br><span class="line">          <span class="comment">// 字体风格,'normal','italic','oblique'</span></span><br><span class="line">          <span class="keyword">if</span> (tempTitle.textStyle.fontStyle) &#123;</span><br><span class="line">            baseTitle.textStyle.fontStyle = tempTitle.textStyle.fontStyle</span><br><span class="line">          &#125;</span><br><span class="line">          <span class="comment">// 字体粗细 'normal','bold','bolder','lighter',100 | 200 | 300 | 400...</span></span><br><span class="line">          <span class="keyword">if</span> (tempTitle.textStyle.fontWeight) &#123;</span><br><span class="line">            baseTitle.textStyle.fontWeight = tempTitle.textStyle.fontWeight</span><br><span class="line">          &#125;</span><br><span class="line">          <span class="comment">// 字体系列</span></span><br><span class="line">          <span class="keyword">if</span> (tempTitle.textStyle.fontFamily) &#123;</span><br><span class="line">            baseTitle.textStyle.fontFamily = tempTitle.textStyle.fontFamily</span><br><span class="line">          &#125;</span><br><span class="line">          <span class="comment">// 字体大小</span></span><br><span class="line">          <span class="keyword">if</span> (tempTitle.textStyle.fontSize) &#123;</span><br><span class="line">            baseTitle.textStyle.fontSize = tempTitle.textStyle.fontSize</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 默认dom属性</span></span><br><span class="line">    <span class="keyword">let</span> baseDom = &#123;</span><br><span class="line">      theme: <span class="string">'light'</span>,</span><br><span class="line">      renderer: <span class="string">'canvas'</span>,</span><br><span class="line">      opts: &#123;</span><br><span class="line">        width: <span class="number">600</span>,</span><br><span class="line">        height: <span class="number">400</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 判断处理是否传入dom属性值</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.theme) &#123;</span><br><span class="line">      baseDom.theme = <span class="keyword">this</span>.theme</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.width) &#123;</span><br><span class="line">      baseDom.opts.width = <span class="built_in">parseInt</span>(<span class="keyword">this</span>.width)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.height) &#123;</span><br><span class="line">      baseDom.opts.height = <span class="built_in">parseInt</span>(<span class="keyword">this</span>.height)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> baseType = <span class="string">'yAxis'</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.barType) &#123;</span><br><span class="line">      baseType = <span class="keyword">this</span>.barType</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 默认toolbox值</span></span><br><span class="line">    <span class="keyword">var</span> baseToolbox = &#123;</span><br><span class="line">      show: <span class="literal">false</span>,</span><br><span class="line">      feature: &#123;</span><br><span class="line">        mark: &#123;show: <span class="literal">true</span>&#125;,</span><br><span class="line">        dataView: &#123;show: <span class="literal">false</span>, readOnly: <span class="literal">false</span>&#125;, <span class="comment">// 数据视图</span></span><br><span class="line">        magicType: &#123;show: <span class="literal">false</span>, <span class="keyword">type</span>: []&#125;, <span class="comment">// 切换为折线图/柱状图</span></span><br><span class="line">        restore: &#123;show: <span class="literal">false</span>&#125;, <span class="comment">// 还原</span></span><br><span class="line">        saveAsImage: &#123;show: <span class="literal">false</span>&#125; <span class="comment">// 保存为图片</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 判断处理传入toolbox属性值</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.dataView) &#123;</span><br><span class="line">      baseToolbox.show = <span class="literal">true</span></span><br><span class="line">      baseToolbox.feature.dataView.show = <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.magicType) &#123;</span><br><span class="line">      baseToolbox.show = <span class="literal">true</span></span><br><span class="line">      baseToolbox.feature.magicType.show = <span class="literal">true</span></span><br><span class="line">      <span class="keyword">if</span> (<span class="keyword">typeof</span> (<span class="keyword">this</span>.magicType) === <span class="string">'string'</span>) &#123;</span><br><span class="line">        baseToolbox.feature.magicType.type = [<span class="keyword">this</span>.magicType]</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        baseToolbox.feature.magicType.type = <span class="keyword">this</span>.magicType</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.restore) &#123;</span><br><span class="line">      baseToolbox.show = <span class="literal">true</span></span><br><span class="line">      baseToolbox.feature.restore.show = <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.saveAsImage) &#123;</span><br><span class="line">      baseToolbox.show = <span class="literal">true</span></span><br><span class="line">      baseToolbox.feature.saveAsImage.show = <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      titleProperty: baseTitle, <span class="comment">// title属性值</span></span><br><span class="line">      domProperty: baseDom, <span class="comment">// dom属性值</span></span><br><span class="line">      <span class="keyword">type</span>: baseType, <span class="comment">// 图表横纵类型</span></span><br><span class="line">      toolboxProperty: baseToolbox<span class="comment">// toolbox属性</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 页面加载</span></span><br><span class="line">  mounted () &#123;</span><br><span class="line">    <span class="keyword">this</span>.setEchart()</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    <span class="comment">// 绘制图表方法</span></span><br><span class="line">    setEchart () &#123;</span><br><span class="line">      <span class="keyword">const</span> _this = <span class="keyword">this</span></span><br><span class="line">      <span class="keyword">let</span> domInit = <span class="keyword">this</span>.$refs.mychart</span><br><span class="line">      <span class="keyword">this</span>.myChart = echarts.init(domInit, _this.domProperty.theme, &#123;width: _this.domProperty.opts.width, height: _this.domProperty.opts.height&#125;)</span><br><span class="line">      <span class="comment">// 指定图表的配置项和数据</span></span><br><span class="line">      <span class="keyword">let</span> option = &#123;</span><br><span class="line">        title: &#123;</span><br><span class="line">          text: _this.titleProperty.text,</span><br><span class="line">          subtext: _this.titleProperty.subtext,</span><br><span class="line">          left: _this.titleProperty.left,</span><br><span class="line">          textStyle: _this.titleProperty.textStyle</span><br><span class="line">        &#125;,</span><br><span class="line">        tooltip: &#123;</span><br><span class="line">          trigger: <span class="string">'axis'</span></span><br><span class="line">        &#125;,</span><br><span class="line">        toolbox: <span class="keyword">this</span>.toolboxProperty,</span><br><span class="line">        legend: &#123;</span><br><span class="line">          data: <span class="keyword">this</span>.legend</span><br><span class="line">        &#125;,</span><br><span class="line">        series: [</span><br><span class="line">        ]</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">// 判断传入图表类型是横轴图表还是纵轴图表</span></span><br><span class="line">      <span class="keyword">if</span> (<span class="keyword">this</span>.type === <span class="string">'xAxis'</span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> tempx = &#123;</span><br><span class="line">          <span class="keyword">type</span>: <span class="string">'value'</span></span><br><span class="line">        &#125;</span><br><span class="line">        option.xAxis = tempx</span><br><span class="line">        option.yAxis = <span class="keyword">this</span>.category</span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">this</span>.type === <span class="string">'yAxis'</span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> tempy = &#123;</span><br><span class="line">          <span class="keyword">type</span>: <span class="string">'value'</span></span><br><span class="line">        &#125;</span><br><span class="line">        option.yAxis = tempy</span><br><span class="line">        option.xAxis = <span class="keyword">this</span>.category</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">// series数据赋值并判断是否是堆叠图表</span></span><br><span class="line">      <span class="keyword">const</span> seriesData = <span class="keyword">this</span>.data</span><br><span class="line">      <span class="keyword">if</span> (seriesData) &#123;</span><br><span class="line">        _.forEach(<span class="keyword">this</span>.legend, <span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">          <span class="keyword">var</span> myBarData = _.get(seriesData, value)</span><br><span class="line">          <span class="built_in">console</span>.log(value)</span><br><span class="line">          <span class="keyword">if</span> (_.hasIn(seriesData, value)) &#123;</span><br><span class="line">            <span class="keyword">var</span> tempSeries = &#123;</span><br><span class="line">              name: value,</span><br><span class="line">              <span class="keyword">type</span>: _this.seriesType,</span><br><span class="line">              data: myBarData</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (_this.stack) &#123;</span><br><span class="line">              tempSeries.stack = _this.stack</span><br><span class="line">            &#125;</span><br><span class="line">            option.series.push(tempSeries)</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">this</span>.myChart.setOption(option)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面三个代码片段在一起，就是这个测试demo的全部组件，具体实现，请看代码注释，下面说说在其他页面如何使用该组件</p>
+<h3 id="4-组件的使用"><a href="#4-组件的使用" class="headerlink" title="4.组件的使用"></a>4.组件的使用</h3><p>打开hellowork.vue文件，删除<div class="hello"><div>内的所有代码，在其中加入下面代码：</div></div></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">component</span> <span class="attr">:is</span>=<span class="string">"currentView"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">:data</span>=<span class="string">"barData"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">:category</span>=<span class="string">"categoryData"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">:legend</span>=<span class="string">"legendData"</span>&gt;</span><span class="tag">&lt;/<span class="name">component</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">import</span> barEcharts <span class="keyword">from</span> <span class="string">'./bardemo'</span> <span class="comment">//导入组件</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  name: <span class="string">'HelloWorld'</span>,</span><br><span class="line">  data () &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="comment">// 图表数据</span></span><br><span class="line">      barData: &#123;</span><br><span class="line">        <span class="string">'2011'</span>: [<span class="number">18203</span>, <span class="number">23489</span>, <span class="number">29034</span>, <span class="number">104970</span>, <span class="number">131744</span>, <span class="number">630230</span>],</span><br><span class="line">        <span class="string">'2012'</span>: [<span class="number">19325</span>, <span class="number">23438</span>, <span class="number">31000</span>, <span class="number">121594</span>, <span class="number">134141</span>, <span class="number">681807</span>]</span><br><span class="line">      &#125;,</span><br><span class="line">      focusType: <span class="number">1</span>,</span><br><span class="line">      <span class="comment">//定义组件，在上面用：is使用，不需要components注册</span></span><br><span class="line">      currentView: barEcharts,</span><br><span class="line">      categoryData: &#123;</span><br><span class="line">        data: [<span class="string">'巴西'</span>, <span class="string">'印尼'</span>, <span class="string">'美国'</span>, <span class="string">'印度'</span>, <span class="string">'中国'</span>, <span class="string">'世界人口(万)'</span>]</span><br><span class="line">      &#125;,</span><br><span class="line">      legendData: [<span class="string">'2011'</span>, <span class="string">'2012'</span>],</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+<p>上图是最基本使用，上图三个是必传的三个参数：保存文件，刷新页面后如下图：</p>
+<p><img src="/2018/10/30/vueAndEchartforBar/vueAndEchart5.png" alt="5"></p>
+<p>下面我们加上标题，并且将表格展示区放大一点</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">component</span> <span class="attr">:is</span>=<span class="string">"currentView"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">:data</span>=<span class="string">"barData"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">title</span>=<span class="string">"世界人口总量"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">width</span>=<span class="string">"1000"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">height</span>=<span class="string">"400"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">:category</span>=<span class="string">"categoryData"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">:legend</span>=<span class="string">"legendData"</span>&gt;</span><span class="tag">&lt;/<span class="name">component</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>修改为上面代码后，绘制的表格如下：</p>
+<p><img src="/2018/10/30/vueAndEchartforBar/15.png" alt="15"></p>
+<p>可看出图表多出了标题，并且宽度明显拉长了</p>
+<p>如果我们需要修改标题颜色和字体，则需要传入一个json对象，具体实现如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">component</span> <span class="attr">:is</span>=<span class="string">"currentView"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">:data</span>=<span class="string">"barData"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">:title</span>=<span class="string">"echarttitle"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">width</span>=<span class="string">"1000"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">height</span>=<span class="string">"400"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">:category</span>=<span class="string">"categoryData"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">:legend</span>=<span class="string">"legendData"</span>&gt;</span><span class="tag">&lt;/<span class="name">component</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">import</span> barEcharts <span class="keyword">from</span> <span class="string">'./bardemo'</span> <span class="comment">//导入组件</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  name: <span class="string">'HelloWorld'</span>,</span><br><span class="line">  data () &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="comment">// 图表数据</span></span><br><span class="line">      barData: &#123;</span><br><span class="line">        <span class="string">'2011'</span>: [<span class="number">18203</span>, <span class="number">23489</span>, <span class="number">29034</span>, <span class="number">104970</span>, <span class="number">131744</span>, <span class="number">630230</span>],</span><br><span class="line">        <span class="string">'2012'</span>: [<span class="number">19325</span>, <span class="number">23438</span>, <span class="number">31000</span>, <span class="number">121594</span>, <span class="number">134141</span>, <span class="number">681807</span>]</span><br><span class="line">      &#125;,</span><br><span class="line">      focusType: <span class="number">1</span>,</span><br><span class="line">      <span class="comment">//定义组件，在上面用：is使用，不需要components注册</span></span><br><span class="line">      currentView: barEcharts,</span><br><span class="line">      categoryData: &#123;</span><br><span class="line">        data: [<span class="string">'巴西'</span>, <span class="string">'印尼'</span>, <span class="string">'美国'</span>, <span class="string">'印度'</span>, <span class="string">'中国'</span>, <span class="string">'世界人口(万)'</span>]</span><br><span class="line">      &#125;,</span><br><span class="line">      legendData: [<span class="string">'2011'</span>, <span class="string">'2012'</span>],</span><br><span class="line">      echarttitle: &#123;</span><br><span class="line">        text: <span class="string">'世界人口总量'</span>,</span><br><span class="line">        left: <span class="string">'right'</span>,</span><br><span class="line">        textStyle: &#123;</span><br><span class="line">          color: <span class="string">'#FF0000'</span>,</span><br><span class="line">          <span class="comment">// 字体大小</span></span><br><span class="line">          fontSize: <span class="number">20</span> <span class="comment">// 默认大小是18</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+<p>上面代码将图表标题字体颜色设置为红色，并修改字体大小为20，位置为靠右，展示结果如下图：</p>
+<p><img src="/2018/10/30/vueAndEchartforBar/7.png" alt="7"></p>
+<p>还可以设置字体的风格、字体的粗细、字体系列等样式：具体配置如下：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">import</span> barEcharts <span class="keyword">from</span> <span class="string">'./bardemo'</span> <span class="comment">// 导入组件</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  name: <span class="string">'HelloWorld'</span>,</span><br><span class="line">  data () &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="comment">// 图表数据</span></span><br><span class="line">      barData: &#123;</span><br><span class="line">        <span class="string">'2011'</span>: [<span class="number">18203</span>, <span class="number">23489</span>, <span class="number">29034</span>, <span class="number">104970</span>, <span class="number">131744</span>, <span class="number">630230</span>],</span><br><span class="line">        <span class="string">'2012'</span>: [<span class="number">19325</span>, <span class="number">23438</span>, <span class="number">31000</span>, <span class="number">121594</span>, <span class="number">134141</span>, <span class="number">681807</span>]</span><br><span class="line">      &#125;,</span><br><span class="line">      focusType: <span class="number">1</span>,</span><br><span class="line">      <span class="comment">// 定义组件，在上面用：is使用，不需要components注册</span></span><br><span class="line">      currentView: barEcharts,</span><br><span class="line">      categoryData: &#123;</span><br><span class="line">        data: [<span class="string">'巴西'</span>, <span class="string">'印尼'</span>, <span class="string">'美国'</span>, <span class="string">'印度'</span>, <span class="string">'中国'</span>, <span class="string">'世界人口(万)'</span>]</span><br><span class="line">      &#125;,</span><br><span class="line">      legendData: [<span class="string">'2011'</span>, <span class="string">'2012'</span>],</span><br><span class="line">      echarttitle: &#123;</span><br><span class="line">        text: <span class="string">'世界人口总量'</span>,</span><br><span class="line">        left: <span class="string">'right'</span>,</span><br><span class="line">        textStyle: &#123;</span><br><span class="line">          color: <span class="string">'#FF0000'</span>,</span><br><span class="line">          <span class="comment">// 字体风格,'normal','italic','oblique'</span></span><br><span class="line">          fontStyle: <span class="string">'normal'</span>,</span><br><span class="line">          <span class="comment">// 字体粗细 'normal','bold','bolder','lighter',100 | 200 | 300 | 400...</span></span><br><span class="line">          fontWeight: <span class="string">'bold'</span>,</span><br><span class="line">          <span class="comment">// 字体系列</span></span><br><span class="line">          fontFamily: <span class="string">'sans-serif'</span>,</span><br><span class="line">          <span class="comment">// 字体大小</span></span><br><span class="line">          fontSize: <span class="number">18</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+<p>下面我们开启数据视图、折线图/柱状图切换、还原、保存图表为图片：</p>
+<p>组件代码修改为如下，新增了四个prop属性赋值：dataView、magicType、restore、saveAsImage</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">component</span> <span class="attr">:is</span>=<span class="string">"currentView"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">:data</span>=<span class="string">"barData"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">:title</span>=<span class="string">"echarttitle"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">width</span>=<span class="string">"1000"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">height</span>=<span class="string">"400"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">:category</span>=<span class="string">"categoryData"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">:legend</span>=<span class="string">"legendData"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">:dataView</span>=<span class="string">"openMagicType"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">:magicType</span>=<span class="string">"openMagicType"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">:restore</span>=<span class="string">"openRestore"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">:saveAsImage</span>=<span class="string">"openSaveAsImage"</span>&gt;</span><span class="tag">&lt;/<span class="name">component</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>定义数据代码如下：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">import</span> barEcharts <span class="keyword">from</span> <span class="string">'./bardemo'</span> <span class="comment">// 导入组件</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  name: <span class="string">'HelloWorld'</span>,</span><br><span class="line">  data () &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="comment">// 图表数据</span></span><br><span class="line">      barData: &#123;</span><br><span class="line">        <span class="string">'2011'</span>: [<span class="number">18203</span>, <span class="number">23489</span>, <span class="number">29034</span>, <span class="number">104970</span>, <span class="number">131744</span>, <span class="number">630230</span>],</span><br><span class="line">        <span class="string">'2012'</span>: [<span class="number">19325</span>, <span class="number">23438</span>, <span class="number">31000</span>, <span class="number">121594</span>, <span class="number">134141</span>, <span class="number">681807</span>]</span><br><span class="line">      &#125;,</span><br><span class="line">      focusType: <span class="number">1</span>,</span><br><span class="line">      <span class="comment">// 定义组件，在上面用：is使用，不需要components注册</span></span><br><span class="line">      currentView: barEcharts,</span><br><span class="line">      categoryData: &#123;</span><br><span class="line">        data: [<span class="string">'巴西'</span>, <span class="string">'印尼'</span>, <span class="string">'美国'</span>, <span class="string">'印度'</span>, <span class="string">'中国'</span>, <span class="string">'世界人口(万)'</span>]</span><br><span class="line">      &#125;,</span><br><span class="line">      legendData: [<span class="string">'2011'</span>, <span class="string">'2012'</span>],</span><br><span class="line">      echarttitle: &#123;</span><br><span class="line">        text: <span class="string">'世界人口总量'</span>,</span><br><span class="line">        left: <span class="string">'left'</span>,</span><br><span class="line">        textStyle: &#123;</span><br><span class="line">          color: <span class="string">'#FF0000'</span>,</span><br><span class="line">          <span class="comment">// 字体风格,'normal','italic','oblique'</span></span><br><span class="line">          fontStyle: <span class="string">'normal'</span>,</span><br><span class="line">          <span class="comment">// 字体粗细 'normal','bold','bolder','lighter',100 | 200 | 300 | 400...</span></span><br><span class="line">          fontWeight: <span class="string">'bold'</span>,</span><br><span class="line">          <span class="comment">// 字体系列</span></span><br><span class="line">          fontFamily: <span class="string">'sans-serif'</span>,</span><br><span class="line">          <span class="comment">// 字体大小</span></span><br><span class="line">          fontSize: <span class="number">18</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      openDataView: <span class="literal">true</span>, <span class="comment">// dataView</span></span><br><span class="line">      openMagicType: <span class="string">'line'</span>, <span class="comment">// magicType可以是字符串，也可以是字符串数组，例如传入['bar','line']就是可以切换为折线图和柱状图</span></span><br><span class="line">      openRestore: <span class="literal">true</span>, <span class="comment">// restore</span></span><br><span class="line">      openSaveAsImage: <span class="literal">true</span> <span class="comment">// saveAsImage</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+<p>运行结果展示：</p>
+<p><img src="/2018/10/30/vueAndEchartforBar/8.png" alt="8"></p>
+<p>点击数据视图：</p>
+<p><img src="/2018/10/30/vueAndEchartforBar/9.png" alt="9"></p>
+<p>点击切换为折线图：</p>
+<p><img src="/2018/10/30/vueAndEchartforBar/10.png" alt="10"></p>
+<p>点击还原：上面的折线图又切换回柱状图</p>
+<p><img src="/2018/10/30/vueAndEchartforBar/11.png" alt="11"></p>
+<p>点击保存为图片：下载一张当前图表的图片</p>
+<p><img src="/2018/10/30/vueAndEchartforBar/12.png" alt="12"></p>
+<p>也可以设置柱状图使用堆叠模式展示，堆叠模式需要设置stack属性，设置<strong>stack=“总量”</strong>，则会展示堆叠的柱状图：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">component</span> <span class="attr">:is</span>=<span class="string">"currentView"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">:data</span>=<span class="string">"barData"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">:title</span>=<span class="string">"echarttitle"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">width</span>=<span class="string">"1000"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">height</span>=<span class="string">"400"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">:category</span>=<span class="string">"categoryData"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">:legend</span>=<span class="string">"legendData"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">:dataView</span>=<span class="string">"openMagicType"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">:magicType</span>=<span class="string">"openMagicType"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">:restore</span>=<span class="string">"openRestore"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">:saveAsImage</span>=<span class="string">"openSaveAsImage"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">stack</span>=<span class="string">"总量"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">seriesType</span>=<span class="string">"bar"</span>&gt;</span><span class="tag">&lt;/<span class="name">component</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>保存展示结果如下：</p>
+<p><img src="/2018/10/30/vueAndEchartforBar/13.png" alt="13"></p>
+<p>如果要使用该组件默认绘制折线图，则需要设置stack属性，这里stack属性默认是柱状图，设置<strong>seriesType=“line”</strong>，则会绘制折线图：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">component</span> <span class="attr">:is</span>=<span class="string">"currentView"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">:data</span>=<span class="string">"barData"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">:title</span>=<span class="string">"echarttitle"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">width</span>=<span class="string">"1000"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">height</span>=<span class="string">"400"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">:category</span>=<span class="string">"categoryData"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">:legend</span>=<span class="string">"legendData"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">:dataView</span>=<span class="string">"openMagicType"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">:magicType</span>=<span class="string">"openMagicType"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">:restore</span>=<span class="string">"openRestore"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">:saveAsImage</span>=<span class="string">"openSaveAsImage"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">seriesType</span>=<span class="string">"line"</span>&gt;</span><span class="tag">&lt;/<span class="name">component</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>保存后页面刷新如下：</p>
+<p><img src="/2018/10/30/vueAndEchartforBar/14.png" alt="14"></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+    
+      <div>
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      </div>
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>赞赏支持</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/weixin.jpg" alt="Martin（中文名：刘国江） 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/zhifubao.jpg" alt="Martin（中文名：刘国江） 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Vue/" rel="tag"><i class="fa fa-tag"></i> Vue</a>
+          
+            <a href="/tags/Echarts/" rel="tag"><i class="fa fa-tag"></i> Echarts</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/25/Go10/" rel="next" title="Go语言学习之旅（10）函数">
+                <i class="fa fa-chevron-left"></i> Go语言学习之旅（10）函数
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/25/Go10/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -355,12 +648,24 @@
                 
               
 
-              <time title="创建时间：2018-10-25 20:30:10 / 修改时间：20:42:39" itemprop="dateCreated datePublished" datetime="2018-10-25T20:30:10+08:00">2018-10-25</time>
+              <time title="创建时间：2018-10-25 20:30:10" itemprop="dateCreated datePublished" datetime="2018-10-25T20:30:10+08:00">2018-10-25</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-10-26 15:30:49" itemprop="dateModified" datetime="2018-10-26T15:30:49+08:00">2018-10-26</time>
               
             
           </span>
@@ -416,7 +721,7 @@
 </li>
 <li><p>Go 语言最少有个 main() 函数。</p>
 </li>
-<li><p>可以通过函数来划分不同功能，逻辑上每个函数执行的是指定的任务。</p>
+<li><p>可以通过函数来划分不同功能，逻辑上每个函数执行的是指定的任务。<a id="more"></a></p>
 </li>
 <li><p>函数声明告诉了编译器函数的名称，返回类型，和参数。</p>
 </li>
@@ -574,6 +879,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/30/vueAndEchartforBar/" rel="prev" title="Vue组件（1）使用Echarts绘制图表-柱状图/折线图">
+                Vue组件（1）使用Echarts绘制图表-柱状图/折线图 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -3086,241 +3395,13 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/25/Go1/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Martin（中文名：刘国江）">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/touxiang3.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Martin Blogs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">Go语言学习之旅（1）概述
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-10-25 19:40:53 / 修改时间：19:57:26" itemprop="dateCreated datePublished" datetime="2018-10-25T19:40:53+08:00">2018-10-25</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/go/" itemprop="url" rel="index"><span itemprop="name">go</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-          
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <h2 id="Go语言历史"><a href="#Go语言历史" class="headerlink" title="Go语言历史"></a>Go语言历史</h2><p>​    Go 是一个开源的编程语言，它能让构造简单、可靠且高效的软件变得容易。</p>
-<p>​    Go是从2007年末由Robert Griesemer, Rob Pike, Ken Thompson主持开发，后来还加入了Ian Lance Taylor, Russ Cox等人，并最终于2009年11月开源，在2012年早些时候发布了Go 1稳定版本。现在Go的开发已经是完全开放的，并且拥有一个活跃的社区 。</p>
-<h2 id="Go-语言特色"><a href="#Go-语言特色" class="headerlink" title="Go 语言特色"></a>Go 语言特色</h2><ul>
-<li>简洁、快速、安全</li>
-<li>并行、有趣、开源</li>
-<li>内存管理、数组安全、编译迅速</li>
-</ul>
-<h2 id="Go-语言用途"><a href="#Go-语言用途" class="headerlink" title="Go 语言用途"></a>Go 语言用途</h2><p>Go 语言被设计成一门应用于搭载 Web 服务器，存储集群或类似用途的巨型中央服务器的系统编程语言。对于高性能分布式系统领域而言，Go 语言无疑比大多数其它语言有着更高的开发效率。它提供了海量并行的支持，这对于游戏服务端的开发而言是再好不过了。</p>
-<h2 id="Go语言安装"><a href="#Go语言安装" class="headerlink" title="Go语言安装"></a>Go语言安装</h2><p>本人使用的是windows系统，所以使用的是msi文件安装，安装很简单，具体安装步骤可参考这篇博客：<a href="https://blog.csdn.net/hhtnan/article/details/78562085" target="_blank" rel="noopener">https://blog.csdn.net/hhtnan/article/details/78562085</a></p>
-<h2 id="第一个Go程序"><a href="#第一个Go程序" class="headerlink" title="第一个Go程序"></a>第一个Go程序</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    fmt.Println(<span class="string">"Hello, World!"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ go run hello.go </span><br><span class="line">Hello, World!</span><br></pre></td></tr></table></figure>
-<h2 id="Go-语言最主要的特性："><a href="#Go-语言最主要的特性：" class="headerlink" title="Go 语言最主要的特性："></a>Go 语言最主要的特性：</h2><ul>
-<li>自动垃圾回收</li>
-<li>更丰富的内置类型</li>
-<li>函数多返回值</li>
-<li>错误处理</li>
-<li>匿名函数和闭包</li>
-<li>类型和接口</li>
-<li>并发编程</li>
-<li>反射</li>
-<li>语言交互性</li>
-</ul>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>Go语言接受了函数式编程的一些想法，支持匿名函数与闭包。再如，Go语言接受了以Erlang语言为代表的面向消息编程思想，支持goroutine和通道，并推荐使用消息而不是共享内存来进行并发编程。总体来说，Go语言是一个非常现代化的语言，精小但非常强大。</p>
-
-      
-    </div>
-
-    
-
-    
-    
-    
-    
-      <div>
-        <div>
-    
-        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
-    
-</div>
-      </div>
-    
-
-    
-
-    
-      <div>
-        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
-  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
-  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
-    <span>赞赏支持</span>
-  </button>
-  <div id="QR" style="display: none;">
-
-    
-      <div id="wechat" style="display: inline-block">
-        <img id="wechat_qr" src="/images/weixin.jpg" alt="Martin（中文名：刘国江） 微信支付">
-        <p>微信支付</p>
-      </div>
-    
-
-    
-      <div id="alipay" style="display: inline-block">
-        <img id="alipay_qr" src="/images/zhifubao.jpg" alt="Martin（中文名：刘国江） 支付宝">
-        <p>支付宝</p>
-      </div>
-    
-
-    
-
-  </div>
-</div>
-
-      </div>
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/Go语言基础/" rel="tag"><i class="fa fa-tag"></i> Go语言基础</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/10/25/Go2/" rel="prev" title="Go语言学习之旅（2）语言结构">
-                Go语言学习之旅（2）语言结构 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
+
 
 
           </div>
@@ -3363,7 +3444,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-count">11</span>
                     <span class="site-state-item-name">文章</span>
                   </a>
                 </div>
@@ -3378,7 +3459,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">1</span>
+                      
+                    
+                    <span class="site-state-item-count">2</span>
                     <span class="site-state-item-name">分类</span>
                   
                 </div>
@@ -3393,7 +3476,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">1</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
                     <span class="site-state-item-name">标签</span>
                   
                 </div>
@@ -3655,6 +3742,15 @@
   
 
   
+  
+  
+  <script src="/lib/bookmark/bookmark.min.js?v=1.0"></script>
+  <script type="text/javascript">
+  
+    bookmark.loadBookmark();
+  
+  </script>
+
 
   
 
